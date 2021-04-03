@@ -14,6 +14,11 @@
   },
   "plugins": ["react"],
   "rules": {
-    "max-len": ["error", { "code": 120 }]
+    "max-len": ["error", { "code": 150 }],
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "global-require": "off"
   }
 }
