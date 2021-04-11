@@ -1,0 +1,23 @@
+@import '../../styles/variables.scss';
+
+.sidebar {
+  width: 100%;
+  max-width: 250px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: $black;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  &-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

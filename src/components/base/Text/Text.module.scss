@@ -1,0 +1,13 @@
+@import '../../../styles/variables.scss';
+
+.text {
+  font-size: $regular;
+
+  &_description {
+    font-size: $description;
+  }
+
+  &_bold {
+    font-weight: $bold;
+  }
+}

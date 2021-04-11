@@ -1,0 +1,35 @@
+@import '../../../styles/variables.scss';
+
+.form-header {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  &__item {
+    width: 50%;
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: $white;
+
+    box-shadow: $shadow;
+
+    cursor: pointer;
+
+    &_border-left {
+      border-top-left-radius: $rounded;
+    }
+
+    &_border-right {
+      border-top-right-radius: $rounded;
+    }
+
+    &_active {
+      background: $yellow-gradient;
+    }
+  }
+}

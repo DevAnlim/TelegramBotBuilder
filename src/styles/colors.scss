@@ -1,5 +1,27 @@
 $green: #a4ffd3;
 $pink: #ff10ae;
 $yellow: #fffa76;
+$purple: #d67dff;
 $black: #000;
 $white: #fff;
+$grey: #f2f2f2;
+$red: #ff4141;
+
+$yellow-gradient: linear-gradient(
+    180deg,
+    #ffffff -49%,
+    rgba(255, 255, 255, 0) 100%
+  ),
+  #fffa76;
+$green-gradient: linear-gradient(
+    180deg,
+    #ffffff -43.06%,
+    rgba(255, 255, 255, 0) 100%
+  ),
+  #a4ffd3;
+$purple-gradient: linear-gradient(
+    180deg,
+    #ffffff -107.5%,
+    rgba(255, 255, 255, 0) 100%
+  ),
+  #d67dff;
