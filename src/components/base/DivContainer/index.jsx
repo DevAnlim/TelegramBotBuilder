@@ -5,7 +5,7 @@ export default function DivContainer({ children, style }) {
 }
 
 DivContainer.defaultProps = {
-  style: '',
+  style: {},
 };
 
 DivContainer.propTypes = {

@@ -1,11 +1,15 @@
 import { useState } from 'react';
-import styles from './AuthorizationForm.module.scss';
+// import { useDispatch } from 'react-redux';
+import Card from '../../base/Card';
+import FormHeader from '../FormHeader';
 import Form from '../../base/Form';
 import Label from '../../base/Label';
+import InputCover from '../../base/InputCover';
 import Input from '../../base/Input';
 import InputGroup from '../../base/InputGroup';
 import Button from '../../base/Button';
-import FormHeader from '../FormHeader';
+import DivContainer from '../../base/DivContainer';
+import createBot from '../../../actions/createBot';
 
 export default function AuthorizationForm({}) {
   const [forms, setForms] = useState({
@@ -16,8 +20,10 @@ export default function AuthorizationForm({}) {
     ],
   });
 
+  // const dispatch = useDispatch();
+
   return (
-    <div className={styles['authorization-form']}>
+    <Card>
       <FormHeader
         options={forms.list}
         activeId={forms.selected.id}
@@ -29,13 +35,43 @@ export default function AuthorizationForm({}) {
       <Form>
         <InputGroup>
           <Label>User name:</Label>
-          <div className={styles['authorization-form-input']}>
-            <Input value="" onChange={() => {}} />
-          </div>
+          <InputCover>
+            <Input type="text" value="" onChange={() => {}} />
+          </InputCover>
         </InputGroup>
 
-        <Button onClick={() => {}}>Sign Up</Button>
+        <InputGroup>
+          <Label>Email:</Label>
+          <InputCover>
+            <Input type="email" value="" onChange={() => {}} />
+          </InputCover>
+        </InputGroup>
+
+        <InputGroup>
+          <Label>Password:</Label>
+          <InputCover>
+            <Input type="password" value="" onChange={() => {}} />
+          </InputCover>
+        </InputGroup>
+
+        <DivContainer
+          style={{
+            width: 100 + '%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Button
+            onClick={() => {
+              // dispatch({ type: 'CREATE', payload: {} });
+              createBot();
+            }}
+          >
+            Sign Up
+          </Button>
+        </DivContainer>
       </Form>
-    </div>
+    </Card>
   );
 }
