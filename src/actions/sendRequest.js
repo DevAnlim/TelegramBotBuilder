@@ -2,15 +2,28 @@ const sendRequest = async function (
   url,
   method = 'GET',
   body,
-  headers = { 'Content-Type': 'application/json' },
+  header = {
+    'Content-Type': 'application/json',
+  },
 ) {
-  const response = await fetch(url, {
+  return fetch(url, {
     method,
-    headers,
+    headers: header,
     body: JSON.stringify(body),
-  });
-
-  return response.json();
+  })
+    .then(async res => {
+      const data = await res.json();
+      if (res.ok) {
+        return data;
+      }
+      return { ok: false, message: data.message };
+    })
+    .catch(err => {
+      return {
+        ok: false,
+        message: 'Неизвестаная ошибка с сервера ' + err.message,
+      };
+    });
 };
 
-export default sendRequest();
+export default sendRequest;

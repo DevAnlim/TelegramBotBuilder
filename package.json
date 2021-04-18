@@ -2,12 +2,12 @@
   "name": "telegram-bot-builder",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8080",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
   },
-  "proxy": "http://localhost:8080",
   "dependencies": {
     "next": "10.0.9",
     "node-sass": "^5.0.0",
