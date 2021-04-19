@@ -3,6 +3,7 @@
 .sidebar {
   width: 100%;
   max-width: 250px;
+  height: 100vh;
 
   display: flex;
   flex-direction: column;
@@ -13,7 +14,23 @@
 
   position: fixed;
   top: 0;
-  left: 0;
+  left: -100%;
+
+  transition: 0.5s;
+
+  @media (max-width: 1340px) {
+    max-width: 100%;
+    top: -100%;
+    left: 0;
+  }
+
+  &_active {
+    left: 0;
+
+    @media (max-width: 1340px) {
+      top: 0;
+    }
+  }
 
   &-list {
     display: flex;

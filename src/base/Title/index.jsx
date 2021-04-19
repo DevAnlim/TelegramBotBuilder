@@ -38,11 +38,11 @@ export default function Title({ type, children, style }) {
 
 Title.defaultProps = {
   type: 'h1',
-  style: '',
+  style: {},
 };
 
 Title.propTypes = {
   children: PropTypes.elementType.isRequired,
   type: PropTypes.string,
-  style: instanceOf(Object),
+  style: PropTypes.instanceOf(Object),
 };

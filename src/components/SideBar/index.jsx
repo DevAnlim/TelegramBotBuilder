@@ -1,13 +1,15 @@
-import styles from './SideBar.module.scss';
 import { PropTypes } from 'prop-types';
+import styles from './SideBar.module.scss';
 
 export default function SideBar({ isOpen, children }) {
   return (
-    isOpen && (
-      <div className={styles.sidebar}>
-        <div className={(styles = ['sidebar-list'])}>{children}</div>
-      </div>
-    )
+    <div
+      className={
+        isOpen ? `${styles.sidebar} ${styles.sidebar_active}` : styles.sidebar
+      }
+    >
+      <div className={styles['sidebar-list']}>{children}</div>
+    </div>
   );
 }
 

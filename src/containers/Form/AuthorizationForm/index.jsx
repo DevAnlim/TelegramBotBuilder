@@ -1,14 +1,14 @@
 import { useState } from 'react';
 // import { useDispatch } from 'react-redux';
-import Card from '../../base/Card';
-import FormHeader from '../FormHeader';
-import Form from '../../base/Form';
-import Label from '../../base/Label';
-import InputCover from '../../base/InputCover';
-import Input from '../../base/Input';
-import InputGroup from '../../base/InputGroup';
-import Button from '../../base/Button';
-import DivContainer from '../../base/DivContainer';
+import Card from '../../../base/Card';
+import FormHeader from '../../../components/FormHeader';
+import Form from '../../../base/Form';
+import Label from '../../../base/Label';
+import InputCover from '../../../base/InputCover';
+import Input from '../../../base/Input';
+import InputGroup from '../../../base/InputGroup';
+import Button from '../../../base/Button';
+import DivContainer from '../../../base/DivContainer';
 import createBot from '../../../actions/createBot';
 
 export default function AuthorizationForm({}) {

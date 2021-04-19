@@ -1,7 +1,7 @@
 import { PropTypes } from 'prop-types';
 import styles from './Text.module.scss';
 
-export default function Text({ type, bold, description, children }) {
+export default function Text({ type, bold, description, children, style }) {
   switch (type) {
     case 'span':
       return (
@@ -9,6 +9,7 @@ export default function Text({ type, bold, description, children }) {
           className={`${description ? styles.text_description : styles.text} ${
             bold ? styles.text_bold : ''
           }`}
+          style={style}
         >
           {children}
         </span>
@@ -23,6 +24,17 @@ export default function Text({ type, bold, description, children }) {
         >
           {children}
         </p>
+      );
+
+    case 'a':
+      return (
+        <a
+          className={`${styels.text_white} ${
+            description ? styles.text_description : styles.text
+          } ${bold ? styles.text_bold : ''}`}
+        >
+          {children}
+        </a>
       );
 
     default:
@@ -42,6 +54,7 @@ Text.defaultProps = {
   type: '',
   bold: false,
   description: false,
+  style: {},
 };
 
 Text.propTypes = {
@@ -49,4 +62,5 @@ Text.propTypes = {
   bold: PropTypes.bool,
   description: PropTypes.bool,
   children: PropTypes.elementType.isRequired,
+  style: PropTypes.instanceOf(Object),
 };
