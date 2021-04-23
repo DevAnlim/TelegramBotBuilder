@@ -1,0 +1,33 @@
+@import '../../styles/variables.scss';
+
+.constructor-main {
+  width: 100%;
+  height: 80vh !important;
+  background: $yellow;
+
+  &-droppable {
+    width: 100%;
+    height: 500px;
+    background: $yellow;
+
+    &_dragged {
+      background: $green;
+    }
+  }
+
+  &-draggable {
+    width: 100%;
+    height: 20px;
+    background: $white;
+
+    &_dragged {
+      background: $black;
+    }
+  }
+
+  &-buttons {
+    width: 100%;
+    height: 50px;
+    background: grey;
+  }
+}

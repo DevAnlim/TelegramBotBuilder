@@ -2,7 +2,7 @@
 
 .constructor-tools {
   width: 20%;
-  height: 100vh;
+  height: 100vh !important;
 
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@
 
   background: $green;
 
-  position: fixed;
-  top: 0;
-  right: 0;
+  // position: fixed;
+  // top: 0;
+  // right: 0;
 }
