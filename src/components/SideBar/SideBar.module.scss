@@ -18,6 +18,8 @@
 
   transition: 0.5s;
 
+  z-index: 99;
+
   @media (max-width: 1340px) {
     max-width: 100%;
     top: -100%;

@@ -1,0 +1,18 @@
+@import '../../styles/variables.scss';
+
+.constructor-header {
+  width: 50%;
+  height: 80px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: $white;
+  box-shadow: $shadow;
+
+  border-radius: 0 0 30px 30px;
+
+  position: fixed;
+  top: 0;
+}

@@ -1,0 +1,48 @@
+@import '../../styles/variables.scss';
+
+.plus-button {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: $black;
+
+  border-radius: $circle;
+
+  &__img {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  &__item {
+    width: 20px;
+    height: 3px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: $white;
+
+    border-radius: $rounded;
+
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+
+      width: 20px;
+      height: 3px;
+
+      background: $white;
+
+      border-radius: $rounded;
+
+      transform: rotate(90deg);
+    }
+  }
+}

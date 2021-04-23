@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Link from 'next/link';
 import BurgerMenu from '../../components/BurgerMenu';
 import SideBar from '../../components/SideBar';
 import links from '../../links';

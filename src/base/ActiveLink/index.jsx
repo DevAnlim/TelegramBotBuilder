@@ -14,7 +14,11 @@ export default function ActiveLink({ children, href, onClick }) {
     <a
       href={href}
       onClick={handleClick}
-      className={href ? `${styles.link} ${styles.link_active}` : styles.link}
+      className={
+        router.pathname === href
+          ? `${styles.link} ${styles.link_active}`
+          : styles.link
+      }
       onClick={onClick}
     >
       {children}

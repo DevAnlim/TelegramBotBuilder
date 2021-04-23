@@ -6,5 +6,8 @@ export default function Header({ children }) {
 }
 
 Header.propTypes = {
-  children: PropTypes.elementType.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.elementType.isRequired,
+    PropTypes.instanceOf(Object).isRequired,
+  ]),
 };
