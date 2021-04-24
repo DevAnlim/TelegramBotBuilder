@@ -1,0 +1,19 @@
+@import '../../styles/variables.scss';
+
+.tools-list__item {
+  margin: 10px 0;
+  max-width: 250px;
+  background: $white;
+  border-radius: $rounded;
+
+  padding: 5px 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &_dragged {
+    background: $black;
+    color: $white;
+  }
+}

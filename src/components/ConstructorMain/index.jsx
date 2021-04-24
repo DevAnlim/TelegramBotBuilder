@@ -1,44 +1,56 @@
+import { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext } from 'react-beautiful-dnd';
+import ToolsList from '../ToolsList';
+import ToolsListItem from '../ToolsListItem';
 import styles from './ConstructorMain.module.scss';
 
-export default function ConstructorMain() {
-  const onDragEnd = () => {
-    console.log('Drag ended');
+export default function ConstructorMain({ list }) {
+  const [toolsList, setToolsList] = useState(list);
+
+  useEffect(() => {
+    setToolsList(list);
+  }, [list]);
+
+  const reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+
+    return result;
+  };
+
+  const onDragEnd = result => {
+    if (!result.destination) {
+      return;
+    }
+
+    const items = reorder(
+      toolsList,
+      result.source.index,
+      result.destination.index,
+    );
+
+    setToolsList(items);
   };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable droppableId="droppable">
-        {(provided, snapshot) => (
-          <div
-            ref={provided.innerRef}
-            className={
-              snapshot.isDraggingOver
-                ? `${styles['constructor-main-droppable']} ${styles['constructor-main-droppable_dragged']}`
-                : styles['constructor-main-droppable']
-            }
-            {...provided.droppableProps}
-          >
-            <Draggable draggableId="0" index={0}>
-              {(provided, snapshot) => (
-                <div
-                  className={
-                    snapshot.isDragging
-                      ? `${styles['constructor-main-draggable']} ${styles['constructor-main-draggable_dragged']}`
-                      : styles['constructor-main-draggable']
-                  }
-                  style={provided.draggableProps.style}
-                  ref={provided.innerRef}
-                  {...provided.draggableProps}
-                  {...provided.dragHandleProps}
-                />
-              )}
-            </Draggable>
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
+      <ToolsList
+        id="droppable"
+        className={styles['constructor-main-list']}
+        classNameDrag={styles['constructor-main-list_dragged']}
+      >
+        {toolsList.map(({ id, label }, index) => (
+          <ToolsListItem id={id} index={index}>
+            {label}
+          </ToolsListItem>
+        ))}
+      </ToolsList>
     </DragDropContext>
   );
 }
+
+ConstructorMain.propTypes = {
+  list: PropTypes.instanceOf(Array).isRequired,
+};
