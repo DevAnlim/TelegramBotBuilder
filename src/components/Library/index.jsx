@@ -2,6 +2,8 @@ import { PropTypes } from 'prop-types';
 import ToolsList from '../ToolsList';
 import LibraryItem from '../LibraryItem';
 import styles from './Library.module.scss';
+import shuffle from '../../utils/shuffle';
+import colors from '../../utils/colors';
 
 export default function Library({ list }) {
   return (
@@ -17,7 +19,7 @@ export default function Library({ list }) {
           key={id}
           id={id}
           index={index}
-          color={'white'}
+          color={shuffle(colors)}
           name={name}
         />
       ))}

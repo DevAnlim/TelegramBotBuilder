@@ -9,7 +9,14 @@ export default function LibraryItem({ id, index, color, name }) {
       index={index}
       className={styles.library__item}
       classNameDrag={styles.library__item_dragged}
-      style={{ background: color }}
+      style={{
+        background: `linear-gradient(
+        180deg,
+        #ffffff 0,
+        rgba(255, 255, 255, 0) 100%
+      ),
+      ${color}`,
+      }}
     >
       {name}
     </ToolsListItem>

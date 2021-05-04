@@ -9,15 +9,14 @@ export default function ToolsListItem({
   classNameDrag,
   style,
 }) {
-  const withStyles = draggableStyles => ({
-    ...style,
-    ...draggableStyles,
-  });
-
   return (
     <Draggable key={id} draggableId={`${id}`} index={index}>
       {(provided, snapshot) => {
-        console.log(withStyles(provided.draggableProps.style));
+        const customStyle = {
+          ...style,
+          ...provided.draggableProps.style,
+        };
+
         return (
           <div
             className={
@@ -25,9 +24,9 @@ export default function ToolsListItem({
                 ? `${className} ${classNameDrag}`
                 : className
             }
-            style={withStyles(provided.draggableProps.style)}
             ref={provided.innerRef}
             {...provided.draggableProps}
+            style={customStyle}
             {...provided.dragHandleProps}
           >
             {children}
