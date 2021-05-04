@@ -1,14 +1,27 @@
 import { PropTypes } from 'prop-types';
+import ToolsList from '../ToolsList';
 import LibraryItem from '../LibraryItem';
 import styles from './Library.module.scss';
 
 export default function Library({ list }) {
   return (
-    <div className={styles.library}>
-      {list?.map(({ id, color, name }) => (
-        <LibraryItem key={id} color={color} name={name} />
+    <ToolsList
+      id="botList"
+      className={styles.library}
+      classNameDrag={styles.library_dragged}
+      type="dashboard"
+      direction="horizontal"
+    >
+      {list?.map(({ id, name }, index) => (
+        <LibraryItem
+          key={id}
+          id={id}
+          index={index}
+          color={'white'}
+          name={name}
+        />
       ))}
-    </div>
+    </ToolsList>
   );
 }
 

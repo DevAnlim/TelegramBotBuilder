@@ -1,6 +1,5 @@
 import { PropTypes } from 'prop-types';
 import { Droppable } from 'react-beautiful-dnd';
-import styles from './ToolsList.module.scss';
 
 export default function ToolsList({
   children,

@@ -12,11 +12,11 @@ function App({ Component, ...pageProps }) {
   );
 }
 
-export default wrapper.withRedux(App);
-
 App.propTypes = {
   Component: PropTypes.elementType.isRequired,
   pageProps: PropTypes.instanceOf(Object).isRequired,
 };
 
 resetServerContext();
+
+export default wrapper.withRedux(App);

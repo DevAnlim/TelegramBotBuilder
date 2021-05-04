@@ -12,7 +12,12 @@ export default function ConstructorTools({ list }) {
       type="OPTIONS"
     >
       {list?.map(({ id, label }, index) => (
-        <ToolsListItem id={id} index={index}>
+        <ToolsListItem
+          id={id}
+          index={index}
+          className={styles['constructor-tools-list__item']}
+          classNameDrag={styles['constructor-tools-list__item_dragged']}
+        >
           {label}
         </ToolsListItem>
       ))}

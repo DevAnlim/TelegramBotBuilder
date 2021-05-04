@@ -1,16 +1,23 @@
 import { PropTypes } from 'prop-types';
+import ToolsListItem from '../ToolsListItem';
 import styles from './LibraryItem.module.scss';
 
-export default function LibraryItem({ color, name }) {
+export default function LibraryItem({ id, index, color, name }) {
   return (
-    <div className={styles.library__item} style={{ background: color }}>
+    <ToolsListItem
+      id={id}
+      index={index}
+      className={styles.library__item}
+      classNameDrag={styles.library__item_dragged}
+      style={{ background: color }}
+    >
       {name}
-    </div>
+    </ToolsListItem>
   );
 }
 
 LibraryItem.defaultProps = {
-  color: 'fff',
+  color: '#fff',
 };
 
 LibraryItem.propTypes = {

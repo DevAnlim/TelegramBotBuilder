@@ -1,4 +1,4 @@
-import { useReducer, useState } from 'react';
+import { useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import ConstructorHeader from '../../components/ConstructorHeader';
 import ConstructorTools from '../../components/ConstructorTools';
@@ -80,28 +80,26 @@ export default function ConstructorContainer() {
   };
 
   return (
-    <>
-      <DragDropContext onDragEnd={onDragEnd}>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <DivContainer
+        style={{ width: '100%', display: 'flex', alignItems: 'center' }}
+      >
         <DivContainer
-          style={{ width: '100%', display: 'flex', alignItems: 'center' }}
+          style={{
+            width: '100%',
+            height: '100vh',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
         >
-          <DivContainer
-            style={{
-              width: '100%',
-              height: '100vh',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <ConstructorHeader onClick={() => {}} />
+          <ConstructorHeader onClick={() => {}} />
 
-            <ConstructorMain list={list.main} />
-          </DivContainer>
-          <ConstructorTools list={list.toolbar} />
+          <ConstructorMain list={list.main} />
         </DivContainer>
-      </DragDropContext>
-    </>
+        <ConstructorTools list={list.toolbar} />
+      </DivContainer>
+    </DragDropContext>
   );
 }

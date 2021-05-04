@@ -16,6 +16,10 @@
   transition: 0.5s;
   cursor: pointer;
 
+  &_dragged {
+    transform: scale(1.1);
+  }
+
   &:hover {
     transform: scale(1.1);
   }

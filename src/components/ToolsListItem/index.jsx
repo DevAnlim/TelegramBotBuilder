@@ -1,19 +1,31 @@
 import { PropTypes } from 'prop-types';
 import { Draggable } from 'react-beautiful-dnd';
-import styles from './ToolsListItem.module.scss';
 
-export default function ToolsListItem({ id, children, index }) {
+export default function ToolsListItem({
+  id,
+  children,
+  index,
+  className,
+  classNameDrag,
+  style,
+}) {
+  const withStyles = draggableStyles => ({
+    ...style,
+    ...draggableStyles,
+  });
+
   return (
     <Draggable key={id} draggableId={`${id}`} index={index}>
       {(provided, snapshot) => {
+        console.log(withStyles(provided.draggableProps.style));
         return (
           <div
             className={
-              snapshot.isDragging
-                ? `${styles['tools-list__item']} ${styles['tools-list__item_dragged']}`
-                : styles['tools-list__item']
+              snapshot.isDraggingOver
+                ? `${className} ${classNameDrag}`
+                : className
             }
-            style={provided.draggableProps.style}
+            style={withStyles(provided.draggableProps.style)}
             ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
