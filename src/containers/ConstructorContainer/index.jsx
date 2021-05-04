@@ -7,7 +7,7 @@ import ConstructorMain from '../../components/ConstructorMain';
 
 export default function ConstructorContainer() {
   const [list, setList] = useState({
-    main: [{ id: 12, label: 'hey' }],
+    main: [],
     toolbar: [
       { id: 0, label: 'Message' },
       { id: 1, label: 'Message1' },
@@ -17,8 +17,8 @@ export default function ConstructorContainer() {
   });
 
   const id2List = {
-    droppable: 'main',
-    droppable2: 'toolbar',
+    constructorMain: 'main',
+    constructorSideBar: 'toolbar',
   };
 
   const getList = id => list[id2List[id]];
@@ -54,12 +54,16 @@ export default function ConstructorContainer() {
 
     if (source.droppableId === destination.droppableId) {
       const items = reorder(
-        toolsList,
+        getList(source.droppableId),
         result.source.index,
         result.destination.index,
       );
 
-      setToolsList(items);
+      if (source.droppableId === 'constructorMain') {
+        setList({ ...list, main: items });
+      } else {
+        setList({ ...list, toolbar: items });
+      }
     } else {
       const result = move(
         getList(source.droppableId),
@@ -68,7 +72,10 @@ export default function ConstructorContainer() {
         destination,
       );
 
-      setList({ main: result.droppable, toolbar: result.droppable2 });
+      setList({
+        main: result.constructorMain,
+        toolbar: result.constructorSideBar,
+      });
     }
   };
 

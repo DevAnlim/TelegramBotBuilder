@@ -7,7 +7,7 @@ import styles from './ConstructorMain.module.scss';
 export default function ConstructorMain({ list }) {
   return (
     <ToolsList
-      id="droppable"
+      id="constructorMain"
       className={styles['constructor-main-list']}
       classNameDrag={styles['constructor-main-list_dragged']}
       type="OPTIONS"

@@ -8,9 +8,10 @@ export default function ToolsList({
   className,
   classNameDrag,
   type,
+  direction,
 }) {
   return (
-    <Droppable droppableId={id} type={type}>
+    <Droppable droppableId={id} type={type} direction={direction}>
       {(provided, snapshot) => {
         return (
           <div
@@ -32,11 +33,16 @@ export default function ToolsList({
   );
 }
 
+ToolsList.defaultProps = {
+  direction: 'vertical',
+};
+
 ToolsList.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.elementType.isRequired,
     PropTypes.instanceOf(Object).isRequired,
   ]),
   id: PropTypes.string.isRequired,
-  type: PropTypes.stringIsRequired,
+  type: PropTypes.string.IsRequired,
+  direction: PropTypes.string,
 };
