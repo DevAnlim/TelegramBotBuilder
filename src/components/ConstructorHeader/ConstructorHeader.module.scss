@@ -1,7 +1,8 @@
 @import '../../styles/variables.scss';
 
 .constructor-header {
-  width: 50%;
+  width: 100%;
+  max-width: 500px;
   height: 80px;
 
   display: flex;

@@ -2,9 +2,15 @@ import { PropTypes } from 'prop-types';
 import { Droppable } from 'react-beautiful-dnd';
 import styles from './ToolsList.module.scss';
 
-export default function ToolsList({ children, id, className, classNameDrag }) {
+export default function ToolsList({
+  children,
+  id,
+  className,
+  classNameDrag,
+  type,
+}) {
   return (
-    <Droppable droppableId={id}>
+    <Droppable droppableId={id} type={type}>
       {(provided, snapshot) => {
         return (
           <div
@@ -32,4 +38,5 @@ ToolsList.propTypes = {
     PropTypes.instanceOf(Object).isRequired,
   ]),
   id: PropTypes.string.isRequired,
+  type: PropTypes.stringIsRequired,
 };

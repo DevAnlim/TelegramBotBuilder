@@ -1,4 +1,4 @@
-@import '../../../styles/variables.scss';
+@import '../../styles/variables.scss';
 
 .form-header {
   width: 100%;
@@ -6,9 +6,12 @@
   display: flex;
   align-items: center;
 
+  position: absolute;
+  top: 0;
+
   &__item {
     width: 50%;
-    height: 55px;
+    height: 70px;
 
     display: flex;
     justify-content: center;
@@ -28,7 +31,7 @@
       border-top-right-radius: $rounded;
     }
 
-    @media (max-width: 1340px) {
+    @media (max-width: 1100px) {
       border-radius: 0;
     }
 

@@ -23,7 +23,16 @@ export default function AuthorizationForm({}) {
   // const dispatch = useDispatch();
 
   return (
-    <Card>
+    <Card
+      style={{
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: 500,
+      }}
+    >
       <FormHeader
         options={forms.list}
         activeId={forms.selected.id}
@@ -32,46 +41,85 @@ export default function AuthorizationForm({}) {
           setForms({ ...forms, selected: selected[0] });
         }}
       />
-      <Form>
-        <InputGroup>
-          <Label>User name:</Label>
-          <InputCover>
-            <Input type="text" value="" onChange={() => {}} />
-          </InputCover>
-        </InputGroup>
 
-        <InputGroup>
-          <Label>Email:</Label>
-          <InputCover>
-            <Input type="email" value="" onChange={() => {}} />
-          </InputCover>
-        </InputGroup>
+      {forms.selected.id ? (
+        <Form>
+          <InputGroup>
+            <Label>User name:</Label>
+            <InputCover>
+              <Input type="text" value="" onChange={() => {}} />
+            </InputCover>
+          </InputGroup>
 
-        <InputGroup>
-          <Label>Password:</Label>
-          <InputCover>
-            <Input type="password" value="" onChange={() => {}} />
-          </InputCover>
-        </InputGroup>
+          <InputGroup>
+            <Label>Email:</Label>
+            <InputCover>
+              <Input type="email" value="" onChange={() => {}} />
+            </InputCover>
+          </InputGroup>
 
-        <DivContainer
-          style={{
-            width: 100 + '%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <Button
-            onClick={() => {
-              // dispatch({ type: 'CREATE', payload: {} });
-              createBot();
+          <InputGroup>
+            <Label>Password:</Label>
+            <InputCover>
+              <Input type="password" value="" onChange={() => {}} />
+            </InputCover>
+          </InputGroup>
+
+          <DivContainer
+            style={{
+              width: 100 + '%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: 20,
             }}
           >
-            Sign Up
-          </Button>
-        </DivContainer>
-      </Form>
+            <Button
+              onClick={() => {
+                // dispatch({ type: 'CREATE', payload: {} });
+                createBot();
+              }}
+            >
+              Sign Up
+            </Button>
+          </DivContainer>
+        </Form>
+      ) : (
+        <Form>
+          <InputGroup>
+            <Label>Email:</Label>
+            <InputCover>
+              <Input type="email" value="" onChange={() => {}} />
+            </InputCover>
+          </InputGroup>
+
+          <InputGroup>
+            <Label>Password:</Label>
+            <InputCover>
+              <Input type="password" value="" onChange={() => {}} />
+            </InputCover>
+          </InputGroup>
+
+          <DivContainer
+            style={{
+              width: 100 + '%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: 20,
+            }}
+          >
+            <Button
+              onClick={() => {
+                // dispatch({ type: 'CREATE', payload: {} });
+                createBot();
+              }}
+            >
+              Sign In
+            </Button>
+          </DivContainer>
+        </Form>
+      )}
     </Card>
   );
 }

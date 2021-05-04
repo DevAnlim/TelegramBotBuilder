@@ -40,6 +40,7 @@ export default function ConstructorTools({ list }) {
         id="droppable"
         className={styles['constructor-tools-list']}
         classNameDrag={styles['constructor-tools-list_dragged']}
+        type="OPTIONS"
       >
         {toolsList.map(({ id, label }, index) => (
           <ToolsListItem id={id} index={index}>

@@ -1,12 +1,13 @@
+import { useState } from 'react';
 import { PropTypes } from 'prop-types';
 import styles from './ConstructorHeader.module.scss';
-import { useState } from 'react';
 import Plusbutton from '../PlusButton';
 import DivContainer from '../../base/DivContainer';
 import Input from '../../base/Input';
 
 export default function ConstructorHeader({ onClick, src }) {
   const [name, setName] = useState('name');
+  const inputWidth = name.length;
 
   return (
     <div className={styles['constructor-header']}>
@@ -23,8 +24,9 @@ export default function ConstructorHeader({ onClick, src }) {
           type="text"
           value={name}
           onChange={event => {
-            setName(event.value);
+            setName(event.target.value);
           }}
+          style={{ width: `${inputWidth}rem` }}
         />
       </DivContainer>
     </div>
