@@ -1,4 +1,5 @@
 import sendRequest from '../actions/sendRequest';
+
 const intitalState = { script: [] };
 
 export default function bot(state = intitalState, action) {

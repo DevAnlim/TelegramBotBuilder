@@ -1,9 +1,10 @@
-import '../styles/globals.css';
 import { PropTypes } from 'prop-types';
-import Layout from '../components/Layout';
 import { resetServerContext } from 'react-beautiful-dnd';
+import wrapper from '../redux/store';
+import Layout from '../components/Layout';
+import '../styles/globals.css';
 
-function App({ Component, pageProps }) {
+function App({ Component, ...pageProps }) {
   return (
     <Layout>
       <Component {...pageProps} />
@@ -11,7 +12,7 @@ function App({ Component, pageProps }) {
   );
 }
 
-export default App;
+export default wrapper.withRedux(App);
 
 App.propTypes = {
   Component: PropTypes.elementType.isRequired,

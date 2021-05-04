@@ -1,12 +1,12 @@
-const sendRequest = async function (
+const sendRequest = async (
   url,
   method = 'GET',
   body,
   header = {
     'Content-Type': 'application/json',
   },
-) {
-  return fetch(url, {
+) =>
+  fetch(url, {
     method,
     headers: header,
     body: JSON.stringify(body),
@@ -18,12 +18,9 @@ const sendRequest = async function (
       }
       return { ok: false, message: data.message };
     })
-    .catch(err => {
-      return {
-        ok: false,
-        message: 'Неизвестаная ошибка с сервера ' + err.message,
-      };
-    });
-};
+    .catch(err => ({
+      ok: false,
+      message: `Неизвестаная ошибка с сервера ${err.message}`,
+    }));
 
 export default sendRequest;
