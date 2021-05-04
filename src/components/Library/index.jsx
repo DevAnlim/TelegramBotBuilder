@@ -4,6 +4,7 @@ import LibraryItem from '../LibraryItem';
 import styles from './Library.module.scss';
 import shuffle from '../../utils/shuffle';
 import colors from '../../utils/colors';
+import LibraryButton from '../LibraryButton';
 
 export default function Library({ list }) {
   return (
@@ -14,15 +15,19 @@ export default function Library({ list }) {
       type="dashboard"
       direction="horizontal"
     >
-      {list?.map(({ id, name }, index) => (
-        <LibraryItem
-          key={id}
-          id={id}
-          index={index}
-          color={shuffle(colors)}
-          name={name}
-        />
-      ))}
+      <div className={`${styles['library-container']} custom-scroll`}>
+        {list?.map(({ id, name }, index) => (
+          <LibraryItem
+            key={id}
+            id={id}
+            index={index}
+            color={shuffle(colors)}
+            name={name}
+          />
+        ))}
+      </div>
+
+      <LibraryButton />
     </ToolsList>
   );
 }

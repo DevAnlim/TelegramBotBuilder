@@ -1,0 +1,50 @@
+@import '../../styles/variables.scss';
+
+.library-button {
+  width: 100px;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: $black;
+
+  position: absolute;
+  right: 0;
+
+  &__item {
+    width: 5px;
+    height: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: $white;
+    border-radius: $rounded;
+
+    transition: 0.5s;
+
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+
+      width: 30px;
+      height: 5px;
+
+      background: $white;
+      border-radius: $rounded;
+
+      transition: 0.5s;
+    }
+  }
+
+  &:hover {
+    &__item {
+      transform: scale(1.1);
+    }
+  }
+}

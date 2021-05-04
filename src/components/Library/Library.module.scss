@@ -9,6 +9,19 @@
 
   background: $black-transparent;
 
+  position: relative;
+
+  &-container {
+    width: calc(100% - 100px);
+    height: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 0;
+    row-gap: 0;
+
+    overflow-x: auto;
+  }
+
   &_dragged {
     background: $grey-transparent;
   }

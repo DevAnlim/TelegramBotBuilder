@@ -20,9 +20,7 @@ export default function ToolsListItem({
         return (
           <div
             className={
-              snapshot.isDraggingOver
-                ? `${className} ${classNameDrag}`
-                : className
+              snapshot.isDragging ? `${className} ${classNameDrag}` : className
             }
             ref={provided.innerRef}
             {...provided.draggableProps}
