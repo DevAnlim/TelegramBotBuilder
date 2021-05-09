@@ -4,7 +4,7 @@ import wrapper from '../redux/store';
 import Layout from '../components/Layout';
 import '../styles/globals.css';
 
-function App({ Component, ...pageProps }) {
+function App({ Component, pageProps }) {
   return (
     <Layout>
       <Component {...pageProps} />
