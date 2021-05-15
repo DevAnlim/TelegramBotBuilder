@@ -2,9 +2,9 @@ import { PropTypes } from 'prop-types';
 import styles from './FormHeader.module.scss';
 import Text from '../../base/Text';
 
-export default function FormHeader({ options, activeId, onClick }) {
+export default function FormHeader({ options, activeId, onClick, ...props }) {
   return (
-    <div className={styles['form-header']}>
+    <div className={styles['form-header']} props>
       {options.map(({ id, name }, index) => (
         <div
           key={index}

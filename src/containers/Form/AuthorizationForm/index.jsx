@@ -15,10 +15,22 @@ export default function AuthorizationForm({}) {
   const [forms, setForms] = useState({
     selected: { id: 0, name: 'Sign In' },
     list: [
-      { id: 0, name: 'Sign In' },
-      { id: 1, name: 'Sign Up' },
+      { id: 0, name: 'Sign In', errors: [], email: '', password: '' },
+      {
+        id: 1,
+        name: 'Sign Up',
+        errors: [{}],
+        username: '',
+        email: '',
+        password: '',
+      },
     ],
   });
+
+  const validateEmail = value => {
+    if (/^\@+\s+$/.test(value)) {
+    }
+  };
 
   // const dispatch = useDispatch();
 
@@ -32,6 +44,7 @@ export default function AuthorizationForm({}) {
         alignItems: 'center',
         minHeight: 500,
       }}
+      adaptive
     >
       <FormHeader
         options={forms.list}
@@ -45,9 +58,9 @@ export default function AuthorizationForm({}) {
       {forms.selected.id ? (
         <Form>
           <InputGroup>
-            <Label>User name:</Label>
+            <Label element="username">User name:</Label>
             <InputCover>
-              <Input type="text" value="" onChange={() => {}} />
+              <Input type="text" value="" onChange={() => {}} id="username" />
             </InputCover>
           </InputGroup>
 
@@ -79,6 +92,7 @@ export default function AuthorizationForm({}) {
                 // dispatch({ type: 'CREATE', payload: {} });
                 createBot();
               }}
+              adaptive
             >
               Sign Up
             </Button>
@@ -114,6 +128,7 @@ export default function AuthorizationForm({}) {
                 // dispatch({ type: 'CREATE', payload: {} });
                 createBot();
               }}
+              adaptive
             >
               Sign In
             </Button>

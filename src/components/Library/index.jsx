@@ -2,11 +2,9 @@ import { PropTypes } from 'prop-types';
 import ToolsList from '../ToolsList';
 import LibraryItem from '../LibraryItem';
 import styles from './Library.module.scss';
-import shuffle from '../../utils/shuffle';
-import colors from '../../utils/colors';
 import LibraryButton from '../LibraryButton';
 
-export default function Library({ list }) {
+export default function Library({ list, onClick }) {
   return (
     <ToolsList
       id="botList"
@@ -16,18 +14,18 @@ export default function Library({ list }) {
       direction="horizontal"
     >
       <div className={`${styles['library-container']} custom-scroll`}>
-        {list?.map(({ id, name }, index) => (
+        {list?.map(({ id, name, color }, index) => (
           <LibraryItem
             key={id}
             id={id}
             index={index}
-            color={shuffle(colors)}
+            color={color}
             name={name}
           />
         ))}
       </div>
 
-      <LibraryButton />
+      <LibraryButton onClick={onClick} />
     </ToolsList>
   );
 }
@@ -38,4 +36,5 @@ Library.defaultProps = {
 
 Library.propTypes = {
   list: PropTypes.instanceOf(Array),
+  onClick: PropTypes.func.isRequired,
 };

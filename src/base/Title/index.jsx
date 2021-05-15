@@ -34,6 +34,13 @@ export default function Title({ type, children, style }) {
         </h5>
       );
 
+    case 'h6':
+      return (
+        <h5 className={styles.title} style={style}>
+          {children}
+        </h5>
+      );
+
     default:
       return (
         <h1 className={styles.title} style={style}>

@@ -1,10 +1,14 @@
 import { PropTypes } from 'prop-types';
 import styles from './Input.module.scss';
 
-export default function Input(
-  { value, onChange, type, placeholder, style },
+export default function Input({
+  value,
+  onChange,
+  type,
+  placeholder,
+  style,
   ...props
-) {
+}) {
   return (
     <input
       value={value}

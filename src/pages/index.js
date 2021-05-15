@@ -6,10 +6,12 @@ import Container from '../base/Container';
 import Title from '../base/Title';
 import LibraryContainer from '../containers/LibraryContainer';
 import sendRequest from '../actions/sendRequest';
+import BotApiKeyModal from '../containers/Modals/BotApiKeyModal';
 
 function Dashboard() {
   return (
     <>
+      <BotApiKeyModal />
       <Head>
         <title>TelegramBotBuilder dashboard</title>
         <link rel="icon" href="/favicon.ico" />
@@ -43,7 +45,7 @@ function Dashboard() {
 // }
 
 export async function getStaticProps(context) {
-  const isAuthorized = JSON.parse(window.localStorage.getItem('isAuthorized'));
+  const isAuthorized = true;
 
   const res = await sendRequest(
     'http://localhost:8080/api/isAuthorized',

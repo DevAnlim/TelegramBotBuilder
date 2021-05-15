@@ -1,0 +1,31 @@
+@import '../../styles/variables.scss';
+
+.modal {
+  &-cover {
+    display: block;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    outline: 0;
+
+    box-sizing: border-box;
+
+    background: rgba(0, 0, 0, 0.5);
+
+    z-index: 99;
+  }
+
+  &-dialog {
+    max-width: 500px;
+    margin: 1.75rem auto;
+  }
+
+  &-body {
+    flex: 1 1 auto;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+}

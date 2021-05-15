@@ -5,10 +5,11 @@ import Library from '../../components/Library';
 import DivContainer from '../../base/DivContainer';
 import Title from '../../base/Title';
 import { changeOrder } from '../../redux/actions/dashboard';
+import { openApiKeyModal } from '../../redux/actions/apiKeyModalActions';
 
 export default function LibraryContainer() {
-  const botList = useSelector(state => state.dashboard.botList);
-  const dipsatch = useDispatch();
+  const { botList } = useSelector(state => state.dashboard);
+  const dispatch = useDispatch();
 
   const [list, setList] = useState(botList);
 
@@ -30,7 +31,11 @@ export default function LibraryContainer() {
     const items = reorder(list, result.source.index, result.destination.index);
 
     setList(items);
-    dipsatch(changeOrder(items));
+    dispatch(changeOrder(items));
+  };
+
+  const handleClick = () => {
+    dispatch(openApiKeyModal());
   };
 
   return (
@@ -44,7 +49,7 @@ export default function LibraryContainer() {
         }}
       >
         <Title type="h4">My bots:</Title>
-        <Library list={list} />
+        <Library list={list} onClick={handleClick} />
       </DivContainer>
     </DragDropContext>
   );

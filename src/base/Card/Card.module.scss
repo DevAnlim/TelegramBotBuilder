@@ -8,16 +8,18 @@
   box-shadow: $shadow;
   border-radius: $rounded;
 
-  @media (max-width: 1100px) {
-    width: 100%;
-    max-width: 100%;
-    height: 100%;
+  &_adaptive {
+    @media (max-width: 1100px) {
+      width: 100%;
+      max-width: 100%;
+      height: 100%;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
 
-    border-radius: 0;
+      border-radius: 0;
+    }
   }
 }
