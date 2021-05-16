@@ -63,8 +63,8 @@ export default function BotKeyForm() {
 
         {
           id: 2,
-          type: 'ON',
-          payload: { message: '🏳️‍🌈', event: 'text' },
+          type: 'HEARS',
+          payload: { message: 'are you alive', event: 'Yep' },
         },
       ],
     });
