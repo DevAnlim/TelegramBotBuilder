@@ -1,7 +1,7 @@
 import { PropTypes } from 'prop-types';
 import { Draggable } from 'react-beautiful-dnd';
 
-export default function ToolsListItem({
+export default function ConstructorMainItem({
   id,
   children,
   index,
@@ -35,7 +35,7 @@ export default function ToolsListItem({
   );
 }
 
-ToolsListItem.propTypes = {
+ConstructorMainItem.propTypes = {
   id: PropTypes.number.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.elementType.isRequired,

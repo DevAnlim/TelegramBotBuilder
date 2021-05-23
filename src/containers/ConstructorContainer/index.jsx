@@ -6,22 +6,15 @@ import DivContainer from '../../base/DivContainer';
 import ConstructorMain from '../../components/ConstructorMain';
 
 export default function ConstructorContainer() {
-  const [list, setList] = useState({
-    main: [],
-    toolbar: [
-      { id: 0, label: 'Message' },
-      { id: 1, label: 'Message1' },
-      { id: 2, label: 'Message2' },
-      { id: 3, label: 'Message3' },
-    ],
-  });
+  const [list, setList] = useState({ constructorMain: [] });
+  const [index, setIndex] = useState(6);
 
-  const id2List = {
-    constructorMain: 'main',
-    constructorSideBar: 'toolbar',
-  };
-
-  const getList = id => list[id2List[id]];
+  const toolbar = [
+    { id: 1, label: 'Message' },
+    { id: 2, label: 'Message1' },
+    { id: 3, label: 'Message2' },
+    { id: 4, label: 'Message3' },
+  ];
 
   const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
@@ -29,6 +22,19 @@ export default function ConstructorContainer() {
     result.splice(endIndex, 0, removed);
 
     return result;
+  };
+
+  const copy = (source, destination, droppableSource, droppableDestination) => {
+    console.log('==> dest', destination);
+
+    const sourceClone = Array.from(source);
+    const destClone = Array.from(destination);
+    const item = sourceClone[droppableSource.index];
+
+    destClone.splice(droppableDestination.index, 0, { ...item, id: index });
+
+    setIndex(index + 1);
+    return destClone;
   };
 
   const move = (source, destination, droppableSource, droppableDestination) => {
@@ -48,34 +54,43 @@ export default function ConstructorContainer() {
   const onDragEnd = result => {
     const { source, destination } = result;
 
+    console.log('==> result', result);
+
+    // dropped outside the list
     if (!destination) {
       return;
     }
 
-    if (source.droppableId === destination.droppableId) {
-      const items = reorder(
-        getList(source.droppableId),
-        result.source.index,
-        result.destination.index,
-      );
-
-      if (source.droppableId === 'constructorMain') {
-        setList({ ...list, main: items });
-      } else {
-        setList({ ...list, toolbar: items });
-      }
-    } else {
-      const result = move(
-        getList(source.droppableId),
-        getList(destination.droppableId),
-        source,
-        destination,
-      );
-
-      setList({
-        main: result.constructorMain,
-        toolbar: result.constructorSideBar,
-      });
+    switch (source.droppableId) {
+      case destination.droppableId:
+        setList({
+          [destination.droppableId]: reorder(
+            list[destination.droppableId],
+            source.index,
+            destination.index,
+          ),
+        });
+        break;
+      case 'constructorSideBar':
+        setList({
+          [destination.droppableId]: copy(
+            toolbar,
+            list[destination.droppableId],
+            source,
+            destination,
+          ),
+        });
+        break;
+      default:
+        setList(
+          move(
+            list[source.droppableId],
+            list[destination.droppableId],
+            source,
+            destination,
+          ),
+        );
+        break;
     }
   };
 
@@ -96,9 +111,9 @@ export default function ConstructorContainer() {
         >
           <ConstructorHeader onClick={() => {}} />
 
-          <ConstructorMain list={list.main} />
+          <ConstructorMain list={list.constructorMain} />
         </DivContainer>
-        <ConstructorTools list={list.toolbar} />
+        <ConstructorTools list={toolbar} />
       </DivContainer>
     </DragDropContext>
   );

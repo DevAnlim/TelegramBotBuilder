@@ -1,4 +1,6 @@
 import { PropTypes } from 'prop-types';
+import ConstructorMainItemContainer from '../../containers/ConstructorMainItemContainer';
+import ConstructorMainItem from '../ConstructorMainItem';
 import ToolsList from '../ToolsList';
 import ToolsListItem from '../ToolsListItem';
 import styles from './ConstructorMain.module.scss';
@@ -12,14 +14,14 @@ export default function ConstructorMain({ list }) {
       type="OPTIONS"
     >
       {list?.map(({ id, label }, index) => (
-        <ToolsListItem
+        <ConstructorMainItem
           id={id}
           index={index}
-          className={styles['constructor-main-list__item']}
-          classNameDrag={styles['constructor-main-list__item_dragged']}
+          variant={styles['constructor-main-list__item']}
+          variantDrag={styles['constructor-main-list__item_dragged']}
         >
-          {label}
-        </ToolsListItem>
+          <ConstructorMainItemContainer value={label} />
+        </ConstructorMainItem>
       ))}
     </ToolsList>
   );

@@ -15,8 +15,8 @@ export default function ConstructorTools({ list }) {
         <ToolsListItem
           id={id}
           index={index}
-          className={styles['constructor-tools-list__item']}
-          classNameDrag={styles['constructor-tools-list__item_dragged']}
+          variant={styles['constructor-tools-list__item']}
+          variantDrag={styles['constructor-tools-list__item_dragged']}
         >
           {label}
         </ToolsListItem>
