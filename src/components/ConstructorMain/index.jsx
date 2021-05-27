@@ -20,7 +20,7 @@ export default function ConstructorMain({ list }) {
           variant={styles['constructor-main-list__item']}
           variantDrag={styles['constructor-main-list__item_dragged']}
         >
-          <ConstructorMainItemContainer value={label} />
+          <ConstructorMainItemContainer id={id} value={label} />
         </ConstructorMainItem>
       ))}
     </ToolsList>

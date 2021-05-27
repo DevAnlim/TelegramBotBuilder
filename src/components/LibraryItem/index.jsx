@@ -7,8 +7,8 @@ export default function LibraryItem({ id, index, color, name }) {
     <ToolsListItem
       id={id}
       index={index}
-      className={styles.library__item}
-      classNameDrag={styles.library__item_dragged}
+      variant={styles.library__item}
+      variantDrag={styles.library__item_dragged}
       style={{
         background: `linear-gradient(
         180deg,

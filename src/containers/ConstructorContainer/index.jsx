@@ -4,16 +4,17 @@ import ConstructorHeader from '../../components/ConstructorHeader';
 import ConstructorTools from '../../components/ConstructorTools';
 import DivContainer from '../../base/DivContainer';
 import ConstructorMain from '../../components/ConstructorMain';
+import Button from '../../base/Button';
 
 export default function ConstructorContainer() {
   const [list, setList] = useState({ constructorMain: [] });
   const [index, setIndex] = useState(6);
 
   const toolbar = [
-    { id: 1, label: 'Message' },
-    { id: 2, label: 'Message1' },
-    { id: 3, label: 'Message2' },
-    { id: 4, label: 'Message3' },
+    { id: 1, label: 'API' },
+    // { id: 2, label: 'Message1' },
+    // { id: 3, label: 'Message2' },
+    // { id: 4, label: 'Message3' },
   ];
 
   const reorder = (list, startIndex, endIndex) => {
@@ -94,6 +95,8 @@ export default function ConstructorContainer() {
     }
   };
 
+  const handleClick = () => {};
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <DivContainer
@@ -112,6 +115,10 @@ export default function ConstructorContainer() {
           <ConstructorHeader onClick={() => {}} />
 
           <ConstructorMain list={list.constructorMain} />
+
+          <Button onClick={handleClick} style={{ marginTop: 20 }}>
+            Save
+          </Button>
         </DivContainer>
         <ConstructorTools list={toolbar} />
       </DivContainer>
