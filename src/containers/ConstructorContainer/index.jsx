@@ -1,17 +1,29 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { DragDropContext } from 'react-beautiful-dnd';
 import ConstructorHeader from '../../components/ConstructorHeader';
 import ConstructorTools from '../../components/ConstructorTools';
 import DivContainer from '../../base/DivContainer';
 import ConstructorMain from '../../components/ConstructorMain';
 import Button from '../../base/Button';
+import MessageCommandContainer from '../MessageCommandContainer';
+import { updateList } from '../../redux/actions/bot';
+import { saveChanges } from '../../http/bot';
 
 export default function ConstructorContainer() {
   const [list, setList] = useState({ constructorMain: [] });
   const [index, setIndex] = useState(6);
 
+  const scheme = useSelector(state => state.bot.list);
+  const dispatch = useDispatch();
+
   const toolbar = [
-    { id: 1, label: 'API' },
+    {
+      id: 1,
+      label: 'Command block',
+      type: 'MESSAGE_COMMAND',
+      values: { name: '', response: '' },
+    },
     // { id: 2, label: 'Message1' },
     // { id: 3, label: 'Message2' },
     // { id: 4, label: 'Message3' },
@@ -26,7 +38,7 @@ export default function ConstructorContainer() {
   };
 
   const copy = (source, destination, droppableSource, droppableDestination) => {
-    console.log('==> dest', destination);
+    // console.log('==> dest', destination);
 
     const sourceClone = Array.from(source);
     const destClone = Array.from(destination);
@@ -55,7 +67,7 @@ export default function ConstructorContainer() {
   const onDragEnd = result => {
     const { source, destination } = result;
 
-    console.log('==> result', result);
+    // console.log('==> result', result);
 
     // dropped outside the list
     if (!destination) {
@@ -66,11 +78,14 @@ export default function ConstructorContainer() {
       case destination.droppableId:
         setList({
           [destination.droppableId]: reorder(
-            list[destination.droppableId],
+            list[source.droppableId],
             source.index,
             destination.index,
           ),
         });
+
+        // dispatch(updateList(list.constructorMain));
+
         break;
       case 'constructorSideBar':
         setList({
@@ -81,6 +96,7 @@ export default function ConstructorContainer() {
             destination,
           ),
         });
+
         break;
       default:
         setList(
@@ -91,11 +107,14 @@ export default function ConstructorContainer() {
             destination,
           ),
         );
+
         break;
     }
   };
 
-  const handleClick = () => {};
+  const handleClick = async () => {
+    const response = await saveChanges(scheme);
+  };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -114,7 +133,16 @@ export default function ConstructorContainer() {
         >
           <ConstructorHeader onClick={() => {}} />
 
-          <ConstructorMain list={list.constructorMain} />
+          {/* <ConstructorMain list={list.constructorMain} /> */}
+
+          <ConstructorMain>
+            {list.constructorMain.map(({ id, type }, index) => {
+              switch (type) {
+                case 'MESSAGE_COMMAND':
+                  return <MessageCommandContainer id={id} index={index} />;
+              }
+            })}
+          </ConstructorMain>
 
           <Button onClick={handleClick} style={{ marginTop: 20 }}>
             Save

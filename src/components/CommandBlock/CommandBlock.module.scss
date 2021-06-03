@@ -1,0 +1,53 @@
+@import '../../styles/variables.scss';
+
+.command-block {
+  width: 80%;
+  padding: 20px 10px;
+  box-sizing: border-box;
+
+  background: $white;
+  box-shadow: $shadow;
+  border-radius: $rounded;
+
+  text-align: center;
+
+  overflow-y: auto;
+
+  &__button {
+    margin-top: 10px;
+    width: 30px;
+    height: 30px;
+
+    background: $grey;
+
+    border-radius: $circle;
+
+    box-sizing: border-box;
+
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+
+      width: 80%;
+      height: 2px;
+
+      background: $white;
+
+      border-radius: $rounded;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+
+      width: 2px;
+      height: 80%;
+
+      background: $white;
+
+      border-radius: $rounded;
+    }
+  }
+}

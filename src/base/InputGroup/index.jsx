@@ -6,5 +6,8 @@ export default function InputGroup({ children }) {
 }
 
 InputGroup.propTypes = {
-  children: PropTypes.elementType.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.elementType,
+    PropTypes.instanceOf(Array),
+  ]).isRequired,
 };

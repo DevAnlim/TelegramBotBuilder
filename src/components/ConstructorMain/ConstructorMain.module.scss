@@ -8,10 +8,15 @@
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+
     align-items: center;
 
     background: $yellow;
+
+    overflow-y: auto;
+
+    padding: 20px 10px;
+    box-sizing: border-box;
 
     &_dragged {
       background: rgba(255, 250, 118, 0.5);
