@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import StartCommand from '../../components/StartCommand';
+import ConstructorBlock from '../../components/ConstructorBlock';
+import Label from '../../base/Label';
+import InputCover from '../../base/InputCover';
+import Input from '../../base/Input';
+import InputGroup from '../../base/InputGroup';
+import Title from '../../base/Title';
 import { addItem, changeValue } from '../../redux/actions/bot';
 
 export default function StartCommandContainer({ id, index }) {
@@ -26,11 +31,21 @@ export default function StartCommandContainer({ id, index }) {
   };
 
   return (
-    <StartCommand
-      id={id}
-      index={index}
-      values={values}
-      onChange={handleChange}
-    />
+    <ConstructorBlock id={id} index={index}>
+      <Title type="h3">Start command</Title>
+
+      <InputGroup>
+        <Label element="commandResponse">Response:</Label>
+        <InputCover>
+          <Input
+            type="text"
+            value={values.response}
+            onChange={handleChange}
+            id="commandResponse"
+            name="response"
+          />
+        </InputCover>
+      </InputGroup>
+    </ConstructorBlock>
   );
 }

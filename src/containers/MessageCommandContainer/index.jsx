@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import MessageCommand from '../../components/MessageCommand';
+import ConstructorBlock from '../../components/ConstructorBlock';
+import Label from '../../base/Label';
+import InputCover from '../../base/InputCover';
+import Input from '../../base/Input';
+import InputGroup from '../../base/InputGroup';
+import Title from '../../base/Title';
 import { addItem, changeValue } from '../../redux/actions/bot';
 
 export default function MessageCommandContainer({ id, index }) {
@@ -26,11 +31,33 @@ export default function MessageCommandContainer({ id, index }) {
   };
 
   return (
-    <MessageCommand
-      id={id}
-      index={index}
-      values={values}
-      onChange={handleChange}
-    />
+    <ConstructorBlock id={id} index={index}>
+      <Title type="h3">Message command</Title>
+      <InputGroup>
+        <Label element="commandName">Command:</Label>
+        <InputCover>
+          <Input
+            type="text"
+            value={values.command}
+            onChange={handleChange}
+            id="commandName"
+            name="command"
+          />
+        </InputCover>
+      </InputGroup>
+
+      <InputGroup>
+        <Label element="commandResponse">Response:</Label>
+        <InputCover>
+          <Input
+            type="text"
+            value={values.response}
+            onChange={handleChange}
+            id="commandResponse"
+            name="response"
+          />
+        </InputCover>
+      </InputGroup>
+    </ConstructorBlock>
   );
 }
