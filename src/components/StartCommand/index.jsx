@@ -3,10 +3,10 @@ import Label from '../../base/Label';
 import InputCover from '../../base/InputCover';
 import Input from '../../base/Input';
 import InputGroup from '../../base/InputGroup';
-import styles from './MessageCommand.module.scss';
+import styles from './StartCommand.module.scss';
 import Title from '../../base/Title';
 
-export default function MessageCommand({ id, index, values, onChange }) {
+export default function StartCommand({ id, index, values, onChange }) {
   return (
     <Draggable key={id} draggableId={`${id}`} index={index}>
       {(provided, snapshot) => {
@@ -14,27 +14,15 @@ export default function MessageCommand({ id, index, values, onChange }) {
           <div
             className={
               snapshot.isDragging
-                ? `${styles['message-command']} ${styles['message-command_drag']}`
-                : styles['message-command']
+                ? `${styles['start-command']} ${styles['start-command_drag']}`
+                : styles['start-command']
             }
             ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.draggableProps.style}
             {...provided.dragHandleProps}
           >
-            <Title type="h3">Message command</Title>
-            <InputGroup>
-              <Label element="commandName">Command:</Label>
-              <InputCover>
-                <Input
-                  type="text"
-                  value={values.command}
-                  onChange={onChange}
-                  id="commandName"
-                  name="command"
-                />
-              </InputCover>
-            </InputGroup>
+            <Title type="h3">Start command</Title>
 
             <InputGroup>
               <Label element="commandResponse">Response:</Label>

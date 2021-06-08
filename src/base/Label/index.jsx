@@ -10,6 +10,6 @@ export default function Label({ children, element }) {
 }
 
 Label.propTypes = {
-  children: PropTypes.elementType.isRequire,
+  children: PropTypes.elementType.isRequired,
   element: PropTypes.string.isRequired,
 };

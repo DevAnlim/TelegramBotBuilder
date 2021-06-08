@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import MessageCommand from '../../components/MessageCommand';
+import StartCommand from '../../components/StartCommand';
 import { addItem, changeValue } from '../../redux/actions/bot';
 
-export default function MessageCommandContainer({ id, index }) {
+export default function StartCommandContainer({ id, index }) {
   const dispatch = useDispatch();
 
   const [values, setValues] = useState({
@@ -13,7 +13,7 @@ export default function MessageCommandContainer({ id, index }) {
 
   useEffect(() => {
     dispatch(
-      addItem({ id, values, label: 'Command block', type: 'MESSAGE_COMMAND' }),
+      addItem({ id, values, label: 'Start command', type: 'START_COMMAND' }),
     );
   }, []);
 
@@ -26,7 +26,7 @@ export default function MessageCommandContainer({ id, index }) {
   };
 
   return (
-    <MessageCommand
+    <StartCommand
       id={id}
       index={index}
       values={values}

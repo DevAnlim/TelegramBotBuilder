@@ -8,7 +8,9 @@ import ConstructorMain from '../../components/ConstructorMain';
 import Button from '../../base/Button';
 import MessageCommandContainer from '../MessageCommandContainer';
 import { updateList } from '../../redux/actions/bot';
-import { saveChanges } from '../../http/bot';
+import { initializeBot, saveChanges } from '../../http/bot';
+import APIBlockContainer from '../APIBlockContainer';
+import StartCommandContainer from '../StartCommandContainer';
 
 export default function ConstructorContainer() {
   const [list, setList] = useState({ constructorMain: [] });
@@ -20,10 +22,23 @@ export default function ConstructorContainer() {
   const toolbar = [
     {
       id: 1,
-      label: 'Command block',
+      label: 'Start command',
+      type: 'START_COMMAND',
+      values: { name: '', response: '' },
+    },
+    {
+      id: 2,
+      label: 'Message command',
       type: 'MESSAGE_COMMAND',
       values: { name: '', response: '' },
     },
+    {
+      id: 3,
+      label: 'API',
+      type: 'API_BLOCK',
+      values: { name: '', response: '' },
+    },
+
     // { id: 2, label: 'Message1' },
     // { id: 3, label: 'Message2' },
     // { id: 4, label: 'Message3' },
@@ -114,6 +129,8 @@ export default function ConstructorContainer() {
 
   const handleClick = async () => {
     const response = await saveChanges(scheme);
+
+    console.log(response, 'RESPONSE');
   };
 
   return (
@@ -140,6 +157,11 @@ export default function ConstructorContainer() {
               switch (type) {
                 case 'MESSAGE_COMMAND':
                   return <MessageCommandContainer id={id} index={index} />;
+                case 'API_BLOCK':
+                  return <APIBlockContainer id={id} index={index} />;
+
+                case 'START_COMMAND':
+                  return <StartCommandContainer id={id} index={index} />;
               }
             })}
           </ConstructorMain>

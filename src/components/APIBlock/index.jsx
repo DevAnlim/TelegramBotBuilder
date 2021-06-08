@@ -3,10 +3,10 @@ import Label from '../../base/Label';
 import InputCover from '../../base/InputCover';
 import Input from '../../base/Input';
 import InputGroup from '../../base/InputGroup';
-import styles from './MessageCommand.module.scss';
+import styles from './APIBlock.module.scss';
 import Title from '../../base/Title';
 
-export default function MessageCommand({ id, index, values, onChange }) {
+export default function APIBlock({ id, index, values, onChange }) {
   return (
     <Draggable key={id} draggableId={`${id}`} index={index}>
       {(provided, snapshot) => {
@@ -14,36 +14,49 @@ export default function MessageCommand({ id, index, values, onChange }) {
           <div
             className={
               snapshot.isDragging
-                ? `${styles['message-command']} ${styles['message-command_drag']}`
-                : styles['message-command']
+                ? `${styles['api-block']} ${styles['api-block_drag']}`
+                : styles['api-block']
             }
             ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.draggableProps.style}
             {...provided.dragHandleProps}
           >
-            <Title type="h3">Message command</Title>
+            <Title type="h3">API</Title>
             <InputGroup>
-              <Label element="commandName">Command:</Label>
-              <InputCover>
+              <Label element={`entrance${id}`}>API entrance:</Label>
+              <InputCover variant={styles['api-block__input']}>
                 <Input
                   type="text"
-                  value={values.command}
+                  value={values.entrance}
                   onChange={onChange}
-                  id="commandName"
-                  name="command"
+                  id={`entrance${id}`}
+                  name="entrance"
                 />
               </InputCover>
             </InputGroup>
 
             <InputGroup>
-              <Label element="commandResponse">Response:</Label>
-              <InputCover>
+              <Label element={`searchKey${id}`}>search key:</Label>
+              <InputCover variant={styles['api-block__input']}>
+                <Input
+                  type="text"
+                  value={values.query}
+                  onChange={onChange}
+                  id={`searchKey${id}`}
+                  name="searchKey"
+                />
+              </InputCover>
+            </InputGroup>
+
+            <InputGroup>
+              <Label element={`response${id}`}>Response:</Label>
+              <InputCover variant={styles['api-block__input']}>
                 <Input
                   type="text"
                   value={values.response}
                   onChange={onChange}
-                  id="commandResponse"
+                  id={`response${id}`}
                   name="response"
                 />
               </InputCover>
