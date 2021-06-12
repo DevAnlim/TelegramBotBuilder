@@ -7,6 +7,7 @@ import Title from '../base/Title';
 import LibraryContainer from '../containers/LibraryContainer';
 import sendRequest from '../actions/sendRequest';
 import BotApiKeyModal from '../containers/Modals/BotApiKeyModal';
+import { isUserAuthorized } from '../http/authorization';
 
 function Dashboard() {
   return (
@@ -47,15 +48,11 @@ function Dashboard() {
 export async function getStaticProps(context) {
   const isAuthorized = true;
 
-  const res = await sendRequest(
-    'http://localhost:8080/api/isAuthorized',
-    'POST',
-    {
-      isAuthorized,
-    },
-  ).then(res => res);
+  const res = await isUserAuthorized({ isAuthorized });
 
-  if (!res.ok) {
+  console.log(res);
+
+  if (!res.data.ok) {
     return {
       redirect: {
         destination: '/authorization',

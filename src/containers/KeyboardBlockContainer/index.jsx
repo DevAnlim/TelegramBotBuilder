@@ -6,14 +6,14 @@ import InputCover from '../../base/InputCover';
 import Input from '../../base/Input';
 import InputGroup from '../../base/InputGroup';
 import Title from '../../base/Title';
+import AddButton from '../../components/AddButton';
 import { addItem, changeValue } from '../../redux/actions/bot';
 
-export default function APIBlockContainer({ id, index }) {
+export default function KeyboardBlockContainer({ id, index }) {
   const dispatch = useDispatch();
 
   const [values, setValues] = useState({
-    entrance: '',
-    keys: '',
+    buttonList: [],
   });
 
   useEffect(() => {
@@ -30,6 +30,8 @@ export default function APIBlockContainer({ id, index }) {
     dispatch(changeValue({ id, name, value }));
   };
 
+  const handleClick = () => {};
+
   console.log(values);
   return (
     <ConstructorBlock
@@ -41,35 +43,27 @@ export default function APIBlockContainer({ id, index }) {
           #ffffff -107.5%,
           rgba(255, 255, 255, 0) 100%
         ),
-        #d67dff`,
+        #ff10ae`,
       }}
     >
-      <Title type="h3">API</Title>
-      <InputGroup>
-        <Label element={`entrance${id}`}>API entrance:</Label>
-        <InputCover>
-          <Input
-            type="text"
-            value={values.entrance}
-            onChange={handleChange}
-            id={`entrance${id}`}
-            name="entrance"
-          />
-        </InputCover>
-      </InputGroup>
+      <Title type="h3">Keyboard</Title>
 
-      <InputGroup>
-        <Label element={`searchKeys${id}`}>searchKeys:</Label>
-        <InputCover>
-          <Input
-            type="text"
-            value={values.keys}
-            onChange={handleChange}
-            id={`searchKeys${id}`}
-            name="keys"
-          />
-        </InputCover>
-      </InputGroup>
+      {valiues.buttonList.map(({ callbackId, text, callback }) => (
+        <InputGroup key={callbackId}>
+          <Label element={`entrance${callbackId}`}>API entrance:</Label>
+          <InputCover>
+            <Input
+              type="text"
+              value={values.entrance}
+              onChange={handleChange}
+              id={`entrance${callbackId}`}
+              name=""
+            />
+          </InputCover>
+        </InputGroup>
+      ))}
+
+      <AddButton onClick={handleClick} />
     </ConstructorBlock>
   );
 }
