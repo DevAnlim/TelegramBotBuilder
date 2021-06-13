@@ -9,4 +9,8 @@
   background: transparent;
 
   font-size: $regular;
+
+  &_light {
+    color: $white;
+  }
 }

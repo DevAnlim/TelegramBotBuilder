@@ -1,0 +1,17 @@
+@import '../../styles/variables.scss';
+
+.telegram-input-cover {
+  width: 100%;
+  height: 30px;
+
+  border-radius: 5px;
+  background: $telegram-btn;
+
+  padding: 0 10px;
+  border: 1px solid black;
+  box-sizing: border-box;
+
+  &_secondary {
+    background: $light-grey;
+  }
+}

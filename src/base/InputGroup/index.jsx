@@ -1,8 +1,16 @@
 import { PropTypes } from 'prop-types';
 import styles from './InputGroup.module.scss';
 
-export default function InputGroup({ children }) {
-  return <div className={styles['input-group']}>{children}</div>;
+export default function InputGroup({ children, sm, md, lg }) {
+  return (
+    <div
+      className={`${styles['input-group']} ${sm && styles['input-group_sm']} ${
+        md && styles['input-group_md']
+      } ${lg && styles['input-group_lg']}`}
+    >
+      {children}
+    </div>
+  );
 }
 
 InputGroup.propTypes = {

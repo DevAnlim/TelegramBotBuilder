@@ -3,4 +3,8 @@
 .label {
   font-size: $description;
   padding-bottom: 5px;
+
+  &_light {
+    color: $white;
+  }
 }

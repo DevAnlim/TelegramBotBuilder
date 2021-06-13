@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DragDropContext } from 'react-beautiful-dnd';
+import { v4 as uuidv4 } from 'uuid';
 import ConstructorHeader from '../../components/ConstructorHeader';
 import ConstructorTools from '../../components/ConstructorTools';
 import DivContainer from '../../base/DivContainer';
@@ -11,32 +12,57 @@ import { updateList } from '../../redux/actions/bot';
 import { initializeBot, saveChanges } from '../../http/bot';
 import APIBlockContainer from '../APIBlockContainer';
 import StartCommandContainer from '../StartCommandContainer';
+import KeyboardBlockContainer from '../KeyboardBlockContainer';
+import InlineKeyboardBlockContainer from '../InlineKeyboardBlockContainer';
 
 export default function ConstructorContainer() {
   const [list, setList] = useState({ constructorMain: [] });
-  const [index, setIndex] = useState(6);
+  const [reorderedScheme, setReorderedScheme] = useState([]);
 
   const scheme = useSelector(state => state.bot.list);
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setReorderedScheme(scheme);
+  }, [scheme]);
 
   const toolbar = [
     {
-      id: 1,
+      id: uuidv4(),
       label: 'Start command',
       type: 'START_COMMAND',
       values: { name: '', response: '' },
     },
     {
-      id: 2,
+      id: uuidv4(),
       label: 'Message command',
       type: 'MESSAGE_COMMAND',
       values: { name: '', response: '' },
     },
     {
-      id: 3,
+      id: uuidv4(),
       label: 'API',
       type: 'API_BLOCK',
       values: { name: '', response: '' },
+    },
+
+    {
+      id: uuidv4(),
+      label: 'Keyboard',
+      type: 'KEYBOARD',
+      values: {
+        buttonList: [],
+      },
+    },
+
+    {
+      id: uuidv4(),
+      label: 'Inline keyboard',
+      type: 'INLINE_KEYBOARD',
+      values: {
+        buttonList: [],
+      },
     },
 
     // { id: 2, label: 'Message1' },
@@ -59,9 +85,8 @@ export default function ConstructorContainer() {
     const destClone = Array.from(destination);
     const item = sourceClone[droppableSource.index];
 
-    destClone.splice(droppableDestination.index, 0, { ...item, id: index });
+    destClone.splice(droppableDestination.index, 0, { ...item, id: uuidv4() });
 
-    setIndex(index + 1);
     return destClone;
   };
 
@@ -99,7 +124,11 @@ export default function ConstructorContainer() {
           ),
         });
 
-        // dispatch(updateList(list.constructorMain));
+        setReorderedScheme(
+          reorder(reorderedScheme, source.index, destination.index),
+        );
+
+        console.log(reorderedScheme, scheme);
 
         break;
       case 'constructorSideBar':
@@ -128,9 +157,10 @@ export default function ConstructorContainer() {
   };
 
   const handleClick = async () => {
-    const response = await saveChanges(scheme);
+    const response = await saveChanges(reorderedScheme);
 
-    console.log(response, 'RESPONSE');
+    // console.log(response, 'RESPONSE');
+    console.log(scheme);
   };
 
   return (
@@ -162,6 +192,12 @@ export default function ConstructorContainer() {
 
                 case 'START_COMMAND':
                   return <StartCommandContainer id={id} index={index} />;
+
+                case 'KEYBOARD':
+                  return <KeyboardBlockContainer id={id} index={index} />;
+
+                case 'INLINE_KEYBOARD':
+                  return <InlineKeyboardBlockContainer id={id} index={index} />;
               }
             })}
           </ConstructorMain>

@@ -7,6 +7,7 @@ export default function Input({
   type,
   placeholder,
   style,
+  light,
   ...props
 }) {
   return (
@@ -15,7 +16,7 @@ export default function Input({
       onChange={event => {
         onChange(event);
       }}
-      className={styles.input}
+      className={`${styles.input} ${light && styles.input_light}`}
       type={type}
       placeholder={placeholder}
       style={style}
@@ -27,6 +28,7 @@ export default function Input({
 Input.defaultProps = {
   placeholder: '',
   styles: {},
+  light: false,
 };
 
 Input.propTypes = {
@@ -35,4 +37,5 @@ Input.propTypes = {
   type: PropTypes.string.isrequired,
   placeholder: PropTypes.string,
   style: PropTypes.instanceOf(Object),
+  light: PropTypes.bool,
 };

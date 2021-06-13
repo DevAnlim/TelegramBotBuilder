@@ -1,0 +1,68 @@
+@import '../../styles/variables.scss';
+
+.constructor-button {
+  max-width: 30px;
+  max-height: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 15px;
+  box-sizing: border-box;
+
+  border-radius: $circle;
+
+  background: $white;
+
+  box-shadow: $shadow;
+
+  position: relative;
+
+  transition: 0.2s;
+
+  &_sm {
+    max-width: 20px;
+    max-height: 20px;
+
+    padding: 10px;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+
+    width: 60%;
+    height: 3px;
+
+    background: $black;
+
+    border-radius: $rounded;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+
+    width: 3px;
+    height: 60%;
+
+    background: $black;
+
+    border-radius: $rounded;
+  }
+
+  &_remove {
+    &::before {
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      transform: rotate(45deg);
+    }
+  }
+}

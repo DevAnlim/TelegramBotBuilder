@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
+import InputContainer from '../../components/InputContainer';
 import ConstructorBlock from '../../components/ConstructorBlock';
 import Label from '../../base/Label';
-import InputCover from '../../base/InputCover';
+import TelegramInputCover from '../../components/TelegramInputCover';
 import Input from '../../base/Input';
 import InputGroup from '../../base/InputGroup';
 import Title from '../../base/Title';
-import AddButton from '../../components/AddButton';
+import DivContainer from '../../base/DivContainer';
+import ConstructorButton from '../../components/ConstructorButton';
 import { addItem, changeValue } from '../../redux/actions/bot';
 
 export default function KeyboardBlockContainer({ id, index }) {
@@ -16,54 +19,102 @@ export default function KeyboardBlockContainer({ id, index }) {
     buttonList: [],
   });
 
+  const { buttonList } = values;
+
   useEffect(() => {
-    dispatch(
-      addItem({ id, values, label: 'Command block', type: 'API_BLOCK' }),
-    );
+    dispatch(addItem({ id, values, label: 'Keyboard', type: 'KEYBOARD' }));
   }, []);
 
-  const handleChange = event => {
-    const { name, value } = event.target;
+  const handleTextChange = event => {
+    const { dataset, value } = event.target;
 
-    setValues({ ...values, [name]: value });
+    buttonList.forEach(buttonListItem => {
+      console.log(buttonListItem, dataset.id);
+      if (buttonListItem.buttonId === dataset.id) {
+        buttonListItem.text = value;
+      }
+    });
 
-    dispatch(changeValue({ id, name, value }));
+    setValues({ ...values, buttonList: [...buttonList] });
+
+    dispatch(changeValue({ id, name: 'buttonList', value: [...buttonList] }));
   };
 
-  const handleClick = () => {};
+  const handleClick = () => {
+    buttonList.push({
+      buttonId: uuidv4(),
+      text: '',
+      callback: '',
+    });
 
-  console.log(values);
+    setValues({ ...values, buttonList: [...buttonList] });
+  };
+
+  const handleRemove = id => {
+    const idList = buttonList.map(({ buttonId }) => buttonId);
+    const index = idList.indexOf(id);
+
+    console.log(idList, index);
+
+    if (index !== -1) {
+      buttonList.splice(index, 1);
+    }
+
+    setValues({ ...values, buttonList: [...buttonList] });
+
+    dispatch(changeValue({ id, name: 'buttonList', value: [...buttonList] }));
+  };
   return (
     <ConstructorBlock
       id={id}
       index={index}
-      style={{
-        background: `linear-gradient(
-          180deg,
-          #ffffff -107.5%,
-          rgba(255, 255, 255, 0) 100%
-        ),
-        #ff10ae`,
-      }}
+      style={
+        {
+          // background: `linear-gradient(
+          //   180deg,
+          //   #ffffff -107.5%,
+          //   rgba(255, 255, 255, 0) 100%
+          // ),
+          // #ff10ae`,
+          // background: '#347597',
+        }
+      }
+
+      //75D19F
+      //347597
     >
       <Title type="h3">Keyboard</Title>
 
-      {valiues.buttonList.map(({ callbackId, text, callback }) => (
-        <InputGroup key={callbackId}>
-          <Label element={`entrance${callbackId}`}>API entrance:</Label>
-          <InputCover>
-            <Input
-              type="text"
-              value={values.entrance}
-              onChange={handleChange}
-              id={`entrance${callbackId}`}
-              name=""
-            />
-          </InputCover>
-        </InputGroup>
+      {values.buttonList.map(({ buttonId, text, callback }) => (
+        <InputContainer key={buttonId}>
+          <InputGroup>
+            <Label element={`buttonText${buttonId}`}>Button text:</Label>
+            <TelegramInputCover>
+              <Input
+                type="text"
+                value={text}
+                onChange={handleTextChange}
+                id={`buttonText${buttonId}`}
+                name={`buttonText${buttonId}`}
+                data-id={buttonId}
+                light
+              />
+            </TelegramInputCover>
+          </InputGroup>
+
+          <ConstructorButton
+            remove
+            sm
+            onClick={() => {
+              handleRemove(buttonId);
+            }}
+          />
+        </InputContainer>
       ))}
 
-      <AddButton onClick={handleClick} />
+      <DivContainer style={{ display: 'flex', justifyContent: 'center' }}>
+        <ConstructorButton onClick={handleClick} />
+      </DivContainer>
     </ConstructorBlock>
   );
 }

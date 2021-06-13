@@ -30,7 +30,6 @@ export default function APIBlockContainer({ id, index }) {
     dispatch(changeValue({ id, name, value }));
   };
 
-  console.log(values);
   return (
     <ConstructorBlock
       id={id}

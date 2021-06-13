@@ -6,14 +6,17 @@ export default function bot(state = intitalState, action) {
   switch (action.type) {
     case 'ADD_ITEM':
       let newList = [...state.list];
-      newList.push(action.payload);
+      const idList = newList.map(({ id }) => id);
 
-      console.log(state.list);
+      const index = idList.indexOf(action.payload.id);
+
+      if (index === -1) {
+        newList.push(action.payload);
+      }
 
       return { ...state, list: [...newList] };
 
     case 'UPDATE_LIST':
-      console.log(action.payload);
       return { ...state, list: [...action.payload] };
 
     case 'CHANGE_VALUE':
@@ -27,7 +30,6 @@ export default function bot(state = intitalState, action) {
         return newListItem;
       });
 
-      console.log(newList, 'Values');
       return { ...state, list: [...newList] };
     default:
       return state;

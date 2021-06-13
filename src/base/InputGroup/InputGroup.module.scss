@@ -7,4 +7,15 @@
 
   padding: 10px 0;
   box-sizing: border-box;
+
+  &_sm {
+    width: 25%;
+  }
+  &_md {
+    width: 55%;
+  }
+
+  &_lg {
+    width: 85%;
+  }
 }
