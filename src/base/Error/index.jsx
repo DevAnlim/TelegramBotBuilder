@@ -1,10 +1,10 @@
 import { PropTypes } from 'prop-types';
 import styles from './Error.module.scss';
 
-export default function Error({ message }) {
-  return <span className={styles.error}>{message}</span>;
+export default function Error({ children }) {
+  return <span className={styles.error}>{children}</span>;
 }
 
 Error.propTypes = {
-  message: PropTypes.string.isRequired,
+  children: PropTypes.elementType.isRequired,
 };

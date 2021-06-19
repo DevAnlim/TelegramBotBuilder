@@ -49,24 +49,6 @@ export default function BotKeyForm() {
   const handleClick = async () => {
     const response = await initializeBot({
       token: inputValue,
-      scheme: [
-        {
-          id: 0,
-          type: 'START',
-          payload: { message: 'hey dude, it works fine' },
-        },
-        {
-          id: 1,
-          type: 'ON',
-          payload: { message: '👍🏿', event: 'sticker' },
-        },
-
-        {
-          id: 2,
-          type: 'HEARS',
-          payload: { message: 'are you alive', event: 'Yep' },
-        },
-      ],
     });
 
     console.log(response);

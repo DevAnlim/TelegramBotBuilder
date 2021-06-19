@@ -29,10 +29,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/constructor": [
+    "/authorization": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/constructor.js"
+      "static/chunks/pages/authorization.js"
     ]
   },
   "ampFirstPages": []

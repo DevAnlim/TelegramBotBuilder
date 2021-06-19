@@ -9,27 +9,58 @@ import Input from '../../../base/Input';
 import InputGroup from '../../../base/InputGroup';
 import Button from '../../../base/Button';
 import DivContainer from '../../../base/DivContainer';
+import Error from '../../../base/Error';
 import createBot from '../../../actions/createBot';
+import { signUp, signIn } from '../../../http/authorization';
 
 export default function AuthorizationForm({}) {
-  const [forms, setForms] = useState({
-    selected: { id: 0, name: 'Sign In' },
-    list: [
-      { id: 0, name: 'Sign In', errors: [], email: '', password: '' },
-      {
-        id: 1,
-        name: 'Sign Up',
-        errors: [{}],
-        username: '',
-        email: '',
-        password: '',
-      },
-    ],
+  const [selected, setSelected] = useState({
+    id: 0,
+    name: 'Sign In',
+    error: null,
+    email: '',
+    password: '',
   });
 
-  const validateEmail = value => {
-    if (/^\@+\s+$/.test(value)) {
+  const forms = [
+    { id: 0, name: 'Sign In', error: null, email: '', password: '' },
+    {
+      id: 1,
+      name: 'Sign Up',
+      error: null,
+      userName: '',
+      email: '',
+      password: '',
+    },
+  ];
+
+  const handleSubmit = async () => {
+    let response = null;
+
+    if (selected.id) {
+      response = await signUp(selected);
+    } else {
+      response = await signIn(selected);
     }
+
+    if (response.data.ok) {
+      setSelected({
+        ...selected,
+        error: response.data.message,
+      });
+    }
+  };
+
+  const switchForms = id => {
+    const selectedForm = forms.filter(item => item.id === id);
+
+    setSelected(selectedForm[0]);
+  };
+
+  const handleChange = event => {
+    const { name, value } = event.target;
+
+    setSelected({ ...selected, [name]: value });
   };
 
   // const dispatch = useDispatch();
@@ -47,94 +78,97 @@ export default function AuthorizationForm({}) {
       adaptive
     >
       <FormHeader
-        options={forms.list}
-        activeId={forms.selected.id}
+        options={forms}
+        activeId={selected.id}
         onClick={id => {
-          const selected = forms.list.filter(item => item.id === id);
-          setForms({ ...forms, selected: selected[0] });
+          switchForms(id);
         }}
       />
 
-      {forms.selected.id ? (
-        <Form>
-          <InputGroup>
-            <Label element="username">User name:</Label>
-            <InputCover>
-              <Input type="text" value="" onChange={() => {}} id="username" />
-            </InputCover>
-          </InputGroup>
+      {/* {selected.id ? ( */}
+      <Form>
+        {selected.id ? (
+          <>
+            <InputGroup>
+              <Label element="userName">User name:</Label>
+              <InputCover>
+                <Input
+                  type="text"
+                  value={selected.userName}
+                  onChange={handleChange}
+                  id="userName"
+                  name="userName"
+                />
+              </InputCover>
+            </InputGroup>
 
-          <InputGroup>
-            <Label>Email:</Label>
-            <InputCover>
-              <Input type="email" value="" onChange={() => {}} />
-            </InputCover>
-          </InputGroup>
+            <InputGroup>
+              <Label>Email:</Label>
+              <InputCover>
+                <Input
+                  type="email"
+                  value={selected.email}
+                  name="email"
+                  onChange={handleChange}
+                />
+              </InputCover>
+            </InputGroup>
 
-          <InputGroup>
-            <Label>Password:</Label>
-            <InputCover>
-              <Input type="password" value="" onChange={() => {}} />
-            </InputCover>
-          </InputGroup>
+            <InputGroup>
+              <Label>Password:</Label>
+              <InputCover>
+                <Input
+                  type="password"
+                  value={selected.password}
+                  onChange={handleChange}
+                  name="password"
+                />
+              </InputCover>
+            </InputGroup>
+          </>
+        ) : (
+          <>
+            <InputGroup>
+              <Label>Email:</Label>
+              <InputCover>
+                <Input
+                  type="email"
+                  value={selected.email}
+                  name="email"
+                  onChange={handleChange}
+                />
+              </InputCover>
+            </InputGroup>
 
-          <DivContainer
-            style={{
-              width: 100 + '%',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginTop: 20,
-            }}
-          >
-            <Button
-              onClick={() => {
-                // dispatch({ type: 'CREATE', payload: {} });
-                createBot();
-              }}
-              adaptive
-            >
-              Sign Up
-            </Button>
-          </DivContainer>
-        </Form>
-      ) : (
-        <Form>
-          <InputGroup>
-            <Label>Email:</Label>
-            <InputCover>
-              <Input type="email" value="" onChange={() => {}} />
-            </InputCover>
-          </InputGroup>
+            <InputGroup>
+              <Label>Password:</Label>
+              <InputCover>
+                <Input
+                  type="password"
+                  value={selected.password}
+                  onChange={handleChange}
+                  name="password"
+                />
+              </InputCover>
+            </InputGroup>
+          </>
+        )}
+        <DivContainer
+          style={{
+            width: 100 + '%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: 20,
+          }}
+        >
+          <Button onClick={handleSubmit} adaptive>
+            {selected.id ? ' Sign up' : 'Sign in'}
+          </Button>
+        </DivContainer>
+      </Form>
 
-          <InputGroup>
-            <Label>Password:</Label>
-            <InputCover>
-              <Input type="password" value="" onChange={() => {}} />
-            </InputCover>
-          </InputGroup>
-
-          <DivContainer
-            style={{
-              width: 100 + '%',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginTop: 20,
-            }}
-          >
-            <Button
-              onClick={() => {
-                // dispatch({ type: 'CREATE', payload: {} });
-                createBot();
-              }}
-              adaptive
-            >
-              Sign In
-            </Button>
-          </DivContainer>
-        </Form>
-      )}
+      {selected.error && <Error>{selected.error}</Error>}
     </Card>
   );
 }
