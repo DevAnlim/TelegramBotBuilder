@@ -45,7 +45,7 @@ function Dashboard() {
 //   };
 // }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const isAuthorized = true;
 
   const res = await isUserAuthorized({ isAuthorized });
