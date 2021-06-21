@@ -50,6 +50,8 @@ export async function getServerSideProps() {
 
   const res = await isUserAuthorized({ isAuthorized });
 
+  console.log(res);
+
   if (!res.data.ok) {
     return {
       redirect: {
