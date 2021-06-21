@@ -50,7 +50,7 @@ export async function getServerSideProps() {
 
   const res = await isUserAuthorized({ isAuthorized });
 
-  console.log(res);
+  console.log(res.data.ok);
 
   if (!res.data.ok) {
     return {
