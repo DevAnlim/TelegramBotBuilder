@@ -10,7 +10,7 @@ export const signIn = async data => {
   return response;
 };
 
-export const isUserAuthorized = async data => {
-  const response = await $host.post('/api/isAuthorized', data);
+export const isUserAuthorized = async () => {
+  const response = await $host.get('/api/isAuthorized');
   return response;
 };
