@@ -45,12 +45,10 @@ function Dashboard() {
 //   };
 // }
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   const isAuthorized = true;
 
   const res = await isUserAuthorized({ isAuthorized });
-
-  console.log(res);
 
   if (!res.data.ok) {
     return {
