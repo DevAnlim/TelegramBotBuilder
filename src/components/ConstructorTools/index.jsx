@@ -3,15 +3,15 @@ import styles from './ConstructorTools.module.scss';
 import ToolsList from '../ToolsList';
 import ToolsListItem from '../ToolsListItem';
 
-export default function ConstructorTools({ list }) {
+export default function ConstructorTools({ children }) {
   return (
     <ToolsList
       id="constructorSideBar"
-      className={styles['constructor-tools-list']}
+      className={`${styles['constructor-tools-list']} custom-scroll`}
       classNameDrag={styles['constructor-tools-list_dragged']}
       type="OPTIONS"
     >
-      {list?.map(({ id, label }, index) => (
+      {/* {list?.map(({ id, label }, index) => (
         <ToolsListItem
           id={id}
           index={index}
@@ -20,11 +20,15 @@ export default function ConstructorTools({ list }) {
         >
           {label}
         </ToolsListItem>
-      ))}
+      ))} */}
+
+      {children}
     </ToolsList>
   );
 }
 
 ConstructorTools.defaultProps = {};
 
-ConstructorTools.propTypes = {};
+ConstructorTools.propTypes = {
+  children: PropTypes.elementType.isRequired,
+};

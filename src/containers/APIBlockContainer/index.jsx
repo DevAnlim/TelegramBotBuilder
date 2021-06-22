@@ -6,6 +6,7 @@ import InputCover from '../../base/InputCover';
 import Input from '../../base/Input';
 import InputGroup from '../../base/InputGroup';
 import Title from '../../base/Title';
+import Divider from '../../base/Divider';
 import { addItem, changeValue } from '../../redux/actions/bot';
 
 export default function APIBlockContainer({ id, index }) {
@@ -44,6 +45,7 @@ export default function APIBlockContainer({ id, index }) {
       }}
     >
       <Title type="h3">API</Title>
+      <Divider />
       <InputGroup>
         <Label element={`entrance${id}`}>API entrance:</Label>
         <InputCover>

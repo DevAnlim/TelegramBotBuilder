@@ -4,6 +4,7 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import { v4 as uuidv4 } from 'uuid';
 import ConstructorHeader from '../../components/ConstructorHeader';
 import ConstructorTools from '../../components/ConstructorTools';
+import ConstructorListItemContainer from '../ConstructorToolsItemContainer';
 import DivContainer from '../../base/DivContainer';
 import ConstructorMain from '../../components/ConstructorMain';
 import Button from '../../base/Button';
@@ -31,18 +32,21 @@ export default function ConstructorContainer() {
     {
       id: uuidv4(),
       label: 'Start command',
+      description: 'Sets a response or action after executing command /start',
       type: 'START_COMMAND',
       values: { name: '', response: '' },
     },
     {
       id: uuidv4(),
       label: 'Message command',
+      description: 'Sets a message or action after a command',
       type: 'MESSAGE_COMMAND',
       values: { name: '', response: '' },
     },
     {
       id: uuidv4(),
       label: 'API',
+      description: 'Sets an API request',
       type: 'API_BLOCK',
       values: { name: '', response: '' },
     },
@@ -50,6 +54,7 @@ export default function ConstructorContainer() {
     {
       id: uuidv4(),
       label: 'Keyboard',
+      description: 'Sets a keyboard menu',
       type: 'KEYBOARD',
       values: {
         buttonList: [],
@@ -59,6 +64,7 @@ export default function ConstructorContainer() {
     {
       id: uuidv4(),
       label: 'Inline keyboard',
+      description: 'Sets an inline keyboard',
       type: 'INLINE_KEYBOARD',
       values: {
         buttonList: [],
@@ -158,9 +164,6 @@ export default function ConstructorContainer() {
 
   const handleClick = async () => {
     const response = await saveChanges(reorderedScheme);
-
-    // console.log(response, 'RESPONSE');
-    console.log(scheme);
   };
 
   return (
@@ -206,7 +209,16 @@ export default function ConstructorContainer() {
             Save
           </Button>
         </DivContainer>
-        <ConstructorTools list={toolbar} />
+        <ConstructorTools>
+          {toolbar.map(({ id, label, description }, index) => (
+            <ConstructorListItemContainer
+              id={id}
+              index={index}
+              label={label}
+              description={description}
+            />
+          ))}
+        </ConstructorTools>
       </DivContainer>
     </DragDropContext>
   );

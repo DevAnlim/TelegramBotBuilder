@@ -1,5 +1,6 @@
 import { useState } from 'react';
 // import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
 import Card from '../../../base/Card';
 import FormHeader from '../../../components/FormHeader';
 import Form from '../../../base/Form';
@@ -14,6 +15,8 @@ import createBot from '../../../actions/createBot';
 import { signUp, signIn } from '../../../http/authorization';
 
 export default function AuthorizationForm({}) {
+  const router = useRouter();
+
   const [selected, setSelected] = useState({
     id: 0,
     name: 'Sign In',
@@ -43,11 +46,13 @@ export default function AuthorizationForm({}) {
       response = await signIn(selected);
     }
 
-    if (response.data.ok) {
+    if (!response.data.ok && response.data.message) {
       setSelected({
         ...selected,
         error: response.data.message,
       });
+    } else {
+      router.replace('/');
     }
   };
 

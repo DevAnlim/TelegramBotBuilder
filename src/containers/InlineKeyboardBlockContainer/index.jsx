@@ -8,6 +8,7 @@ import TelegramInputCover from '../../components/TelegramInputCover';
 import Input from '../../base/Input';
 import InputGroup from '../../base/InputGroup';
 import Title from '../../base/Title';
+import Divider from '../../base/Divider';
 import DivContainer from '../../base/DivContainer';
 import ConstructorButton from '../../components/ConstructorButton';
 import { addItem, changeValue } from '../../redux/actions/bot';
@@ -103,6 +104,7 @@ export default function InlineKeyboardBlockContainer({ id, index }) {
       //347597
     >
       <Title type="h3">Keyboard</Title>
+      <Divider />
 
       {values.buttonList.map(({ buttonId, text, callback }) => (
         <InputContainer key={buttonId}>

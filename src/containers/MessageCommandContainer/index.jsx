@@ -6,6 +6,7 @@ import InputCover from '../../base/InputCover';
 import Input from '../../base/Input';
 import InputGroup from '../../base/InputGroup';
 import Title from '../../base/Title';
+import Divider from '../../base/Divider';
 import { addItem, changeValue } from '../../redux/actions/bot';
 
 export default function MessageCommandContainer({ id, index }) {
@@ -33,6 +34,7 @@ export default function MessageCommandContainer({ id, index }) {
   return (
     <ConstructorBlock id={id} index={index}>
       <Title type="h3">Message command</Title>
+      <Divider />
       <InputGroup>
         <Label element="commandName">Command:</Label>
         <InputCover>
