@@ -52,7 +52,7 @@ export default function AuthorizationForm({}) {
         error: response.data.message,
       });
     } else {
-      router.replace('/');
+      router.push('/');
     }
   };
 

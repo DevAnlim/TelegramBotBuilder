@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 import ConstructorBlock from '../../components/ConstructorBlock';
+import InputContainer from '../../components/InputContainer';
 import Label from '../../base/Label';
 import InputCover from '../../base/InputCover';
 import Input from '../../base/Input';
 import InputGroup from '../../base/InputGroup';
 import Title from '../../base/Title';
 import Divider from '../../base/Divider';
+import DivContainer from '../../base/DivContainer';
+import ConstructorButton from '../../components/ConstructorButton';
 import { addItem, changeValue } from '../../redux/actions/bot';
 
 export default function APIBlockContainer({ id, index }) {
@@ -14,8 +18,11 @@ export default function APIBlockContainer({ id, index }) {
 
   const [values, setValues] = useState({
     entrance: '',
-    keys: '',
+    entry: '',
+    variableList: [{ varId: uuidv4(), variable: '', key: '' }],
   });
+
+  const { variableList } = values;
 
   useEffect(() => {
     dispatch(
@@ -23,12 +30,54 @@ export default function APIBlockContainer({ id, index }) {
     );
   }, []);
 
+  const handleClick = () => {
+    variableList.push({
+      varId: uuidv4(),
+      variable: '',
+      key: '',
+    });
+
+    setValues({ ...values, variableList: [...variableList] });
+  };
+
   const handleChange = event => {
     const { name, value } = event.target;
 
     setValues({ ...values, [name]: value });
 
     dispatch(changeValue({ id, name, value }));
+  };
+
+  const handleVariableChange = event => {
+    const { dataset, value } = event.target;
+
+    variableList.forEach(variableListItem => {
+      if (variableListItem.varId === dataset.id) {
+        variableListItem.variable = value;
+      }
+    });
+
+    setValues({ ...values, variableList: [...variableList] });
+
+    dispatch(
+      changeValue({ id, name: 'variableList', value: [...variableList] }),
+    );
+  };
+
+  const handleKeyChange = event => {
+    const { dataset, value } = event.target;
+
+    variableList.forEach(variableListItem => {
+      if (variableListItem.varId === dataset.id) {
+        variableListItem.key = value;
+      }
+    });
+
+    setValues({ ...values, variableList: [...variableList] });
+
+    dispatch(
+      changeValue({ id, name: 'variableList', value: [...variableList] }),
+    );
   };
 
   return (
@@ -60,17 +109,53 @@ export default function APIBlockContainer({ id, index }) {
       </InputGroup>
 
       <InputGroup>
-        <Label element={`searchKeys${id}`}>searchKeys:</Label>
+        <Label element={`entry${id}`}>JSON entry:</Label>
         <InputCover>
           <Input
             type="text"
-            value={values.keys}
+            value={values.entry}
             onChange={handleChange}
-            id={`searchKeys${id}`}
-            name="keys"
+            id={`entry${id}`}
+            name="entry"
           />
         </InputCover>
       </InputGroup>
+
+      {variableList.map(({ varId, variable, key }) => (
+        <InputContainer key={varId}>
+          <InputGroup md>
+            <Label element={`variable${id}`}>Variable name:</Label>
+            <InputCover>
+              <Input
+                type="text"
+                value={variable}
+                onChange={handleVariableChange}
+                id={`variable${id}`}
+                name="variable"
+                data-id={varId}
+              />
+            </InputCover>
+          </InputGroup>
+
+          <InputGroup md>
+            <Label element={`searchKey${id}`}>Key name:</Label>
+            <InputCover>
+              <Input
+                type="text"
+                value={key}
+                onChange={handleKeyChange}
+                id={`searchKey${id}`}
+                name="key"
+                data-id={varId}
+              />
+            </InputCover>
+          </InputGroup>
+        </InputContainer>
+      ))}
+
+      <DivContainer style={{ display: 'flex', justifyContent: 'center' }}>
+        <ConstructorButton onClick={handleClick} />
+      </DivContainer>
     </ConstructorBlock>
   );
 }

@@ -15,6 +15,7 @@ import APIBlockContainer from '../APIBlockContainer';
 import StartCommandContainer from '../StartCommandContainer';
 import KeyboardBlockContainer from '../KeyboardBlockContainer';
 import InlineKeyboardBlockContainer from '../InlineKeyboardBlockContainer';
+import ProductBlockContainer from '../ProductBlockContainer';
 
 export default function ConstructorContainer() {
   const [list, setList] = useState({ constructorMain: [] });
@@ -68,6 +69,18 @@ export default function ConstructorContainer() {
       type: 'INLINE_KEYBOARD',
       values: {
         buttonList: [],
+      },
+    },
+
+    {
+      id: uuidv4(),
+      label: 'Product Block',
+      description: 'Returns a product list to user after API call',
+      type: 'PRODUCT_BLOCK',
+      values: {
+        img: '',
+        title: { id: uuidv4(), value: '', variable: '' },
+        description: { id: uuidv4(), value: '', variable: '' },
       },
     },
 
@@ -201,6 +214,9 @@ export default function ConstructorContainer() {
 
                 case 'INLINE_KEYBOARD':
                   return <InlineKeyboardBlockContainer id={id} index={index} />;
+
+                case 'PRODUCT_BLOCK':
+                  return <ProductBlockContainer id={id} index={index} />;
               }
             })}
           </ConstructorMain>

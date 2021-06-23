@@ -8,6 +8,10 @@ export default function Input({
   placeholder,
   style,
   light,
+  lg,
+  md,
+  sm,
+
   ...props
 }) {
   return (
@@ -16,7 +20,9 @@ export default function Input({
       onChange={event => {
         onChange(event);
       }}
-      className={`${styles.input} ${light && styles.input_light}`}
+      className={`${styles.input} ${light && styles.input_light} ${
+        lg && styles.input_lg
+      } ${md && styles.input_md} ${sm && styles.input_sm}`}
       type={type}
       placeholder={placeholder}
       style={style}

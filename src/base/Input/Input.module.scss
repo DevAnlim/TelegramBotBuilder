@@ -13,4 +13,16 @@
   &_light {
     color: $white;
   }
+
+  &_lg {
+    width: 70%;
+  }
+
+  &_md {
+    width: 50%;
+  }
+
+  &_sm {
+    width: 30%;
+  }
 }
