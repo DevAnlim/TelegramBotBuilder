@@ -3,6 +3,6 @@ import { server } from '../config';
 
 export default async function createBot() {
   await sendRequest(`${server}/api/bot/create`, 'POST', {
-    token: '1789798446:AAFbhqy-Elo0fW-siH6Z1E1acZgfwA1LGVo',
+    token: '5220999465:AAGUyHQJw5yGGEaCs37UsvCI_JUo-PH2M00',
   }).then(res => console.log(res));
 }
