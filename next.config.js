@@ -15,7 +15,7 @@ module.exports = phase => {
     SERVER_URL: (() => {
       if (isDev) return 'http://localhost:8080';
       if (isProd) {
-        return 'https://botbrotherserver.herokuapp.com/';
+        return 'https://sugar-glistening-boar.glitch.me/';
       }
     })(),
   };
